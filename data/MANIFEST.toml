@@ -765,6 +765,117 @@ note = "nave passando; 11 kHz mono 8 bits, nível normalizado por família"
 
 
 # ============================================================
+# Free soundtrack (Remastered mode)
+# ============================================================
+#
+# Built by tools/free-sfx/build-music.py, which holds the mapping.
+# Twelve names, seven tracks: the free music that suits this game is
+# scarcer than the levels are numerous, so some of them repeat.
+#
+# The names are the 1995 MIDI names, because that is what the Lisp
+# asks for. The music is not the 1995 music, which belongs to Bobby
+# Prince and is in no package here.
+#
+# **Nobody has heard this in the game yet.**
+
+[[asset]]
+path = "music/abuse01.ogg"
+origin = "https://opengameart.org/content/ambience-pack-1-sci-fi-horror"
+author = "Joth"
+license = "CC0"
+modified = true
+note = "ambiência pesada, um minuto em loop; mono 22 kHz"
+
+[[asset]]
+path = "music/abuse02.ogg"
+origin = "https://opengameart.org/content/ambience-pack-1-sci-fi-horror"
+author = "Joth"
+license = "CC0"
+modified = true
+note = "sala de controle tomada; mono 22 kHz"
+
+[[asset]]
+path = "music/abuse04.ogg"
+origin = "https://opengameart.org/content/ambience-pack-1-sci-fi-horror"
+author = "Joth"
+license = "CC0"
+modified = true
+note = "algo preso e vivo; mono 22 kHz"
+
+[[asset]]
+path = "music/abuse07.ogg"
+origin = "https://opengameart.org/content/ambience-pack-1-sci-fi-horror"
+author = "Joth"
+license = "CC0"
+modified = true
+note = "o último registro; mono 22 kHz"
+
+[[asset]]
+path = "music/abuse08.ogg"
+origin = "https://opengameart.org/content/ambience-pack-1-sci-fi-horror"
+author = "Joth"
+license = "CC0"
+modified = true
+note = "estranheza; mono 22 kHz"
+
+[[asset]]
+path = "music/abuse10.ogg"
+origin = "https://opengameart.org/content/horror-atmosphere"
+author = "Juhani Junkala"
+license = "CC0"
+modified = true
+note = "cinco minutos, feita para repetir; mono 22 kHz"
+
+[[asset]]
+path = "music/indst1.ogg"
+origin = "https://opengameart.org/content/ambience-pack-1-sci-fi-horror"
+author = "Joth"
+license = "CC0"
+modified = true
+note = "sala de controle tomada; mono 22 kHz"
+
+[[asset]]
+path = "music/indst2.ogg"
+origin = "https://opengameart.org/content/dark-ambience-loop"
+author = "Iwan Gabovitch (qubodup)"
+license = "GPL-2.0"
+modified = true
+note = "loop curto e escuro; dupla licença CC-BY e GPL, tomada sob GPL-2, a do projeto; mono 22 kHz"
+
+[[asset]]
+path = "music/indst3.ogg"
+origin = "https://opengameart.org/content/ambience-pack-1-sci-fi-horror"
+author = "Joth"
+license = "CC0"
+modified = true
+note = "ambiência pesada, um minuto em loop; mono 22 kHz"
+
+[[asset]]
+path = "music/indst4.ogg"
+origin = "https://opengameart.org/content/horror-atmosphere"
+author = "Juhani Junkala"
+license = "CC0"
+modified = true
+note = "cinco minutos, feita para repetir; mono 22 kHz"
+
+[[asset]]
+path = "music/indst5.ogg"
+origin = "https://opengameart.org/content/ambience-pack-1-sci-fi-horror"
+author = "Joth"
+license = "CC0"
+modified = true
+note = "algo preso e vivo; mono 22 kHz"
+
+[[asset]]
+path = "music/intro.ogg"
+origin = "https://opengameart.org/content/ambience-pack-1-sci-fi-horror"
+author = "Joth"
+license = "CC0"
+modified = true
+note = "estranheza; mono 22 kHz"
+
+
+# ============================================================
 # Fonts
 # ============================================================
 

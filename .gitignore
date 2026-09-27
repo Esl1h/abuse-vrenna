@@ -23,7 +23,6 @@
 # data/classic.
 # ---------------------------------------------------------------------------
 /data/classic/
-/data/music/
 
 # The free pack is the exception, and the shape of the rule is what keeps
 # the net: the original sounds are .wav, ours are .ogg, so everything under
@@ -33,6 +32,8 @@
 /data/sfx/*
 !/data/sfx/*.ogg
 !/data/sfx/CREDITS.md
+/data/music/*
+!/data/music/*.ogg
 # The override pack stays out, with one exception: the pictures that are
 # ours. A pack downloaded for testing is third-party art of uncertain
 # licence and must not be committed by accident, which is what the first

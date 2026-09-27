@@ -5,7 +5,8 @@
 # and .hmi, so ignoring everything here except the free pack's Vorbis files
 # still catches them, and scripts/check-licenses.sh fails on any file with
 # no manifest entry.
-/music
+/music/*
+!/music/*.ogg
 /sfx/*
 !/sfx/*.ogg
 !/sfx/CREDITS.md
