@@ -110,6 +110,14 @@ add_test(NAME aspect
     WORKING_DIRECTORY ${abuse_SOURCE_DIR})
 set_tests_properties(aspect PROPERTIES SKIP_RETURN_CODE 77)
 
+# What the packages actually ship. Every other suite runs from the source
+# tree, where everything is where the game left it; installing is the step
+# they all take and the one nothing looked at, and it broke silently once.
+add_test(NAME install_tree
+    COMMAND ${ABUSE_BASH} ${abuse_SOURCE_DIR}/scripts/check-install.sh
+            ${abuse_BINARY_DIR}
+    WORKING_DIRECTORY ${abuse_SOURCE_DIR})
+
 # The free pack against what the game asks for. A missing sound is the
 # quietest failure there is: the game plays on and one event is silent
 # forever. Cheap, and it needs no binary.
