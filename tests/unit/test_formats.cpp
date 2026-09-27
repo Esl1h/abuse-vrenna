@@ -37,6 +37,25 @@ TEST_CASE("a wav request offers the compressed formats") {
         CHECK(c[i] != "sfx/laser.wav");
 }
 
+TEST_CASE("an hmi request offers the free soundtrack") {
+    // The music goes through the same rule as the effects, and the name it
+    // asks for is the 1995 MIDI one: song::song takes music/abuse01.ogg when
+    // it is there, because the MIDI itself is not redistributable and is in
+    // no package here.
+    auto c = sound_candidates("music/abuse01.hmi", true);
+    CHECK(c.size() == 4);
+    CHECK(c[0] == "music/abuse01.hmi");
+    CHECK(c[1] == "music/abuse01.ogg");
+    CHECK(c[2] == "music/abuse01.flac");
+    CHECK(c[3] == "music/abuse01.wav");
+}
+
+TEST_CASE("the Original mode gets no soundtrack substitution either") {
+    auto c = sound_candidates("music/abuse01.hmi", false);
+    CHECK(c.size() == 1);
+    CHECK(c[0] == "music/abuse01.hmi");
+}
+
 TEST_CASE("the extension is matched whatever its case") {
     auto c = sound_candidates("SFX/LASER.WAV", true);
     CHECK(c.size() == 3);
