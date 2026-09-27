@@ -453,6 +453,31 @@ song::song(char const * filename)
     rw = NULL;
     music = NULL;
 
+    // A free track first, where one exists. Same rule as the sound effects:
+    // the name the Lisp asks for ends in .hmi, and outside the Original mode
+    // a Vorbis or FLAC file of the same name counts. The Original mode gets
+    // no substitution, because it plays what it was given.
+    if (abuse::data::mode() != abuse::data::Mode::Original)
+    {
+        for (std::string const &candidate :
+             abuse::audio::sound_candidates(filename, true))
+        {
+            if (candidate == filename)
+                continue;
+
+            std::string const path =
+                std::string(get_filename_prefix() ? get_filename_prefix() : "")
+                + candidate;
+
+            m_free_music = MIX_LoadAudio(mixer, path.c_str(), false);
+            if (m_free_music)
+            {
+                printf("Music: %s served by %s\n", filename, candidate.c_str());
+                return;
+            }
+        }
+    }
+
     // Built by hand instead of going through open_file, so the overlay has to
     // be applied here too: in Original mode the music lives with the sounds.
     char* realname = join_strings(get_filename_prefix(), filename);
@@ -517,6 +542,14 @@ song::~song()
 {
     if(playing())
         stop();
+
+    if (m_free_music)
+    {
+        MIX_DestroyAudio(m_free_music);
+        m_free_music = NULL;
+        free(Name);
+        return;
+    }
 #ifndef MUSIC_NATIVE_MIDI
     // NULL out the active track - it may still exist if music was playing
     activeTrack = NULL;
@@ -535,6 +568,24 @@ song::~song()
 void song::play( unsigned char volume )
 {
     song_id = 1;
+
+    if (m_free_music)
+    {
+        if (m_free_track == NULL)
+        {
+            m_free_track = find_available_track(abuse::audio::kUi);
+            if (m_free_track == NULL)
+                return;
+        }
+        MIX_SetTrackAudio(m_free_track, m_free_music);
+        MIX_SetTrackGain(m_free_track,
+                         abuse::audio::voice_gain(abuse::audio::Bus::Music,
+                                                  volume));
+        // Looped, because a free track is a minute long and the MIDI it
+        // stands in for played until the level ended.
+        MIX_PlayTrack(m_free_track, 0);
+        return;
+    }
 
 #ifdef MUSIC_NATIVE_MIDI
     NativeMidi_SetVolume(abuse::audio::voice_gain(abuse::audio::Bus::Music,
@@ -559,6 +610,17 @@ void song::stop( long fadeout_time )
 {
     song_id = 0;
 
+    if (m_free_music)
+    {
+        if (m_free_track != NULL)
+        {
+            MIX_StopTrack(m_free_track,
+                          MIX_TrackMSToFrames(m_free_track, fadeout_time));
+            m_free_track = NULL;
+        }
+        return;
+    }
+
 #ifdef MUSIC_NATIVE_MIDI
     if (NativeMidi_Active())
     {
@@ -575,6 +637,9 @@ void song::stop( long fadeout_time )
 
 int song::playing()
 {
+    if (m_free_music)
+        return m_free_track != NULL && MIX_TrackPlaying(m_free_track);
+
 #ifdef MUSIC_NATIVE_MIDI
     return NativeMidi_Active();
 #else
@@ -584,6 +649,15 @@ int song::playing()
 
 void song::set_volume( int volume )
 {
+    if (m_free_music)
+    {
+        if (m_free_track != NULL)
+            MIX_SetTrackGain(m_free_track,
+                             abuse::audio::voice_gain(abuse::audio::Bus::Music,
+                                                      volume));
+        return;
+    }
+
 #ifdef MUSIC_NATIVE_MIDI
     NativeMidi_SetVolume(abuse::audio::voice_gain(abuse::audio::Bus::Music,
                                                   volume));

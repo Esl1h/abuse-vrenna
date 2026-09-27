@@ -62,6 +62,17 @@ private:
     MIX_Track* activeTrack;
 #endif
     SDL_IOStream* rw;
+
+    // A free track standing in for the MIDI one.
+    //
+    // The Lisp asks for music/abuse01.hmi and always will, because the
+    // engine and the Lisp are coupled by those names; the same widening the
+    // sound effects get applies here, so music/abuse01.ogg is taken when it
+    // is there. These two are set only then, and every method below asks
+    // them first, which is also what makes this work on a build with native
+    // MIDI compiled in: that path cannot play Vorbis at all.
+    MIX_Audio* m_free_music = NULL;
+    MIX_Track* m_free_track = NULL;
 };
 
 #endif
