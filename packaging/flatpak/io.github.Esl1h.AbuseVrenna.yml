@@ -83,6 +83,19 @@ modules:
     sources:
       - type: dir
         path: ../..
+        # What is not the source. build/ holds the dependency cache the
+        # free sound pack is made from, which is hundreds of megabytes,
+        # arrives with whatever permissions its zip had, and once stopped
+        # this build dead on a directory it could not read. None of it is
+        # needed here: the pack that ships is in data/, already built.
+        skip:
+          - build
+          - build-flatpak
+          - build-flatpak-bundle.flatpak
+          - dist
+          - docs
+          - .flatpak-builder
+          - .git
       - type: git
         url: https://github.com/libsdl-org/SDL_native_midi.git
         commit: 64236646bc50ba7a196c2cc05dad86f0bde3f55f
