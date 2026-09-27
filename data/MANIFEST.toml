@@ -157,6 +157,614 @@ modified = true
 ai = { tool = "Claude Code", model = "claude-opus-5", date = "2026-09-18" }
 
 # ============================================================
+# Free sound pack (Remastered mode)
+# ============================================================
+#
+# Built by tools/free-sfx/build-pack.py, which holds the mapping and
+# the reason for each choice. Every file is CC0 or public domain, so
+# the pack needs no credit line to be redistributable; the credits
+# are in data/sfx/CREDITS.md anyway.
+#
+# The names are Bobby Prince's, because that is what the Lisp asks
+# for; the contents are not his and never were. Nothing under
+# classic/ was read, converted or used as a reference: each choice
+# comes from the written description of the event in
+# docs/audio-map.md.
+#
+# **Nobody has heard these yet.**
+
+[[asset]]
+path = "sfx/CREDITS.md"
+origin = "Abuse: Vrenna"
+license = "GPL-2.0-or-later"
+modified = false
+
+[[asset]]
+path = "sfx/adie02.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "morte de alienígena grande; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/adie03.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "morte grande, também ambiente; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/adie05.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "morte de alienígena pequeno; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ahit01.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "dor de alienígena; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/aland01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "alienígena pousando; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/alien01.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "alienígena gritando; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/amb07.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "provocação; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/amb10.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "alerta, susto; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/amb11.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "aberto, inferno; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/amb13.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "aberto, vento; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/amb16.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "aparição; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ambcave1.ogg"
+origin = "https://opengameart.org/content/ancient-caverns-horror-ambient-loop"
+author = "congusbongus"
+license = "CC0"
+modified = true
+note = "caverna; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ambcave2.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "caverna, inferno; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ambcave3.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "caverna, água; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ambcave4.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "caverna, túnel; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ambfrst2.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "fora, corvos; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ambtech1.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "ambiente industrial; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ambtech2.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "ambiente industrial; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ambtech3.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "ambiente industrial; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ammo01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "pegar munição; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ammo02.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "arma montada inimiga; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/aslash01.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "corte ou mordida; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/ball01.ogg"
+origin = "https://opengameart.org/content/100-cc0-metal-and-wood-sfx"
+author = "rubberduck"
+license = "CC0"
+modified = true
+note = "quique de bola de aço; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/blkfoot4.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "parede oculta sumindo; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/button02.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "botão do menu; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/cleaner.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "o limpador; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/crmble01.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "bloco desmoronando; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/delobj01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "editor: apagar objeto; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/doorup01.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "porta subindo; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/doorup02.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "porta descendo; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/eleacc01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "plataforma acelerando; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/elect02.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "eletricidade do chão; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/eledec01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "plataforma desacelerando; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/endlvl02.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "fim do nível; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/fadeon01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "luz esmaecendo; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/firebmb1.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "bomba incendiária; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/fly03.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "voo; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/force01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "campo de força; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/grenad01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "explodir algo; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/health01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "ganhar vida; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/lasrmis2.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "laser em algo que não morre; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/lava01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "lava jorrando; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/link01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "editor: ligar objetos; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/logo09.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "abertura; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/mghit01.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "metralhadora no chão; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/mghit02.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "metralhadora no chão; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/plasma02.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "sabre curto; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/plasma03.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "arma de plasma; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/pldeth02.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/pldeth04.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/pldeth05.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/pldeth07.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/plpain01.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/plpain02.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/plpain04.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/plpain10.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/poof05.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "sumiço na morte; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/poof06.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "explosão de planeta; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/robot02.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "robô voador; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/rocket02.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "foguete disparado; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/save05.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "salvar no console; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/scream02.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "grito ao longe; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/scream03.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "grito ao longe; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/scream08.ogg"
+origin = "https://opengameart.org/content/horror-sound-effects-library"
+author = "Little Robot Sound Factory"
+license = "CC-BY-4.0"
+modified = true
+note = "grito ao longe; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/speed02.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "velocidade; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/spring03.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "mola; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/swish01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "porta abrindo; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/switch01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "interruptor; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/telept01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "teletransporte; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/throw01.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "granada lançada; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/timerfst.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "tique da bomba; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/zap2.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "tiro de laser; 11 kHz mono 8 bits, nível normalizado por família"
+
+[[asset]]
+path = "sfx/zap3.ogg"
+origin = "http://abuse.zoy.org/wiki/download"
+author = "Crack dot Com"
+license = "public-domain"
+modified = true
+note = "nave passando; 11 kHz mono 8 bits, nível normalizado por família"
+
+
+# ============================================================
 # Fonts
 # ============================================================
 

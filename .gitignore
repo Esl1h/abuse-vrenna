@@ -23,8 +23,16 @@
 # data/classic.
 # ---------------------------------------------------------------------------
 /data/classic/
-/data/sfx/
 /data/music/
+
+# The free pack is the exception, and the shape of the rule is what keeps
+# the net: the original sounds are .wav, ours are .ogg, so everything under
+# data/sfx/ stays out except the Vorbis files the free pack is made of and
+# the credits beside them. An original dropped in there is still ignored,
+# and scripts/check-licenses.sh fails on anything without a manifest entry.
+/data/sfx/*
+!/data/sfx/*.ogg
+!/data/sfx/CREDITS.md
 # The override pack stays out, with one exception: the pictures that are
 # ours. A pack downloaded for testing is third-party art of uncertain
 # licence and must not be committed by accident, which is what the first

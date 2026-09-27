@@ -1,5 +1,11 @@
-# For the time being, let's ignore non-free data
-# Note that it's possible this data may be OK to upload to GitHub, I'm unclear
-# on the exact license
+# Upstream's net against the non-free data, kept and narrowed.
+#
+# The original sound and music are Bobby Prince's, are not redistributable
+# and never enter this repository; see rule 2 of AGENTS.md. They are .wav
+# and .hmi, so ignoring everything here except the free pack's Vorbis files
+# still catches them, and scripts/check-licenses.sh fails on any file with
+# no manifest entry.
 /music
-/sfx
+/sfx/*
+!/sfx/*.ogg
+!/sfx/CREDITS.md
