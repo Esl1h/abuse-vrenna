@@ -11,8 +11,8 @@ pkgname=abuse-vrenna
 # Arch forbids a hyphen in pkgver, and the tag has one. _tag is what the
 # release is called; pkgver is what pacman compares, and 0.9.0alpha.0 sorts
 # before 0.9.0, which is what a pre-release should do.
-_tag=v0.9.0-alpha.0
-pkgver=0.9.0alpha.0
+_tag=v0.9.0-alpha.1
+pkgver=0.9.0alpha.1
 pkgrel=1
 pkgdesc="Modern port of Abuse (1995), the run-and-gun side-scroller with free aiming"
 arch=('x86_64' 'aarch64')
@@ -25,7 +25,7 @@ optdepends=('curl: downloading the original sound and music')
 # not conflict with `abuse`, the SDL 1.2 port. The two can be installed side
 # by side and share nothing but the user's ~/.abuse from a legacy install.
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/$_tag.tar.gz")
-sha256sums=('54d81ee02481fed5ce6b6f92fe27b4b7903d047c5ddd0f639678b9ddc160998e')
+sha256sums=('SKIP')  # preenchido quando a tag existir: makepkg -g
 
 _srcdir="$pkgname-${_tag#v}"
 

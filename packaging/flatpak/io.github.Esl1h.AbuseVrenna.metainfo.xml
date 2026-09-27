@@ -89,6 +89,24 @@
   </screenshots>
 
   <releases>
+    <release version="0.9.0-alpha.1" date="2026-09-27" type="development">
+      <description>
+        <p>
+          The Remastered mode has sound and music of its own, and every
+          Linux package carries them.
+        </p>
+        <ul>
+          <li>73 free sound effects and 12 music tracks, none of them the 1995 audio</li>
+          <li>Widescreen: a wider buffer now means a wider view, and the same fight</li>
+          <li>Installing was broken by the new data and is fixed, with a suite that checks it</li>
+          <li>A scripted run opens no audio device, which is what turned CI red on Windows</li>
+        </ul>
+        <p>
+          The soundtrack has not been judged by ear in the game, and there
+          is still no macOS package.
+        </p>
+      </description>
+    </release>
     <release version="0.9.0-alpha.0" date="2026-09-25" type="development">
       <description>
         <p>First published pre-release. Playable, and not finished.</p>
