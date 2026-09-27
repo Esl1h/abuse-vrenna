@@ -86,6 +86,28 @@ bool classic_sound_installed()
     return std::filesystem::is_directory(sfx, ec);
 }
 
+// Whether this build ships a free pack of its own, which is what decides
+// whether the Remastered mode borrows the original one. A pack is any .ogg
+// under the data directory's sfx/, because that is what the free pack is:
+// the names the Lisp asks for, with a format the mixer also takes.
+bool free_sound_installed()
+{
+    char const *prefix = get_filename_prefix();
+    std::filesystem::path const sfx =
+        std::filesystem::path(prefix ? prefix : "") / "sfx";
+
+    std::error_code ec;
+    if (!std::filesystem::is_directory(sfx, ec))
+        return false;
+
+    for (auto const &entry : std::filesystem::directory_iterator(sfx, ec))
+    {
+        if (entry.is_regular_file(ec) && entry.path().extension() == ".ogg")
+            return true;
+    }
+    return false;
+}
+
 }
 
 // Only when the player has not chosen one does the system locale get a say.
@@ -1103,13 +1125,18 @@ void setup( int argc, char **argv )
         abuse::hd::set_enabled( false );
     }
     else if( flags.classic_sfx && !abuse::harness::headless()
+             && !free_sound_installed()
              && classic_sound_installed() )
     {
-        // The Remastered mode ships no sound of its own yet, and a mute
-        // game is the loudest thing missing from it. If the player has
-        // installed the original data, it is theirs and it is right here,
-        // so the same overlay goes on: the sound and music come from it and
-        // nothing else does.
+        // Borrowed only where there is nothing of our own. The Remastered
+        // mode shipped no sound at all until the free pack existed, and a
+        // mute game was the loudest thing missing from it; with a pack in
+        // data/sfx/ the borrowing would bury it, because the overlay is
+        // consulted first.
+        //
+        // If the player has installed the original data and there is no
+        // free pack, it is theirs and it is right here, so the overlay goes
+        // on: the sound and music come from it and nothing else does.
         //
         // Nothing is converted, resampled or written; the files are played
         // exactly as they are, which is the rule that protects them.
