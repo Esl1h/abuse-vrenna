@@ -197,21 +197,32 @@ and the Original mode are compared against reference frames on every run,
 and the replay hashes have to stay identical whatever is switched on: the
 simulation is not allowed to notice any of it.
 
+The Remastered mode now has sound and music of its own, free to
+redistribute: 73 effects and 12 tracks, from a horror library, from
+Golgotha, which Crack dot Com released into the public domain, and from
+CC0 work on OpenGameArt. The effects go through the palette the engine was
+written for, 11 kHz and eight bits, because clean studio recordings sound
+like a brighter game than this one; the music does not, since what it
+stands in for was MIDI and had no grit to match.
+
+There are packages: an AppImage, a Flatpak, a .deb, an .rpm, a portable
+tarball and a PKGBUILD, each built and started on the distribution it is
+for. The first pre-release, `v0.9.0-alpha.0`, carries them.
+
 Open:
 
-- **A free sound set.** The public domain Golgotha pack covers 19 of the 78
-  events; the other 59 need a source, and the ones that need a human voice
-  are the hard part. Until then the Remastered mode borrows the original
-  audio when it is installed, and is otherwise silent
+- **The soundtrack has not been judged by ear in the game.** The effects
+  have; the twelve music tracks have not, and seven tracks cover twelve
+  names, so some repeat
 - **Human validation.** The game has been played on Linux and, once, on
-  Windows 11. What nobody has judged yet by playing: widescreen, the new
-  HUD, a physical gamepad, and how any of the visual additions feel
+  Windows 11. What nobody has judged yet by playing: widescreen, a physical
+  gamepad, and how the visual additions feel
 - **Art.** The higher resolution pack has the mechanism and no art; a second,
   more distant background layer for parallax needs tiles that do not exist
-- Packaging. The manifests for Flatpak, the AUR and an AppImage are written
-  and none of them has been built yet
-- More replays that do something. One exists, recorded from a text script,
-  and it is what a person's eyes caught before any test did
+- **macOS.** It builds there, and there is no package: a usable bundle has
+  to carry the data and its libraries and be signed and notarised
+- More replays that do something. Three exist, one of them recorded from a
+  person playing, and it is what a person's eyes caught before any test did
 
 Inherited from upstream and still open: dead code removal, and replacing the
 jFILE/bFILE layer with SDL's IO abstraction.
