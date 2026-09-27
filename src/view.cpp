@@ -843,15 +843,18 @@ void recalc_local_view_space()   // calculates view areas for local players, sho
     int w=h*320/200,y=5;
     if (w<300) w=300;
 
-    // Phase 6.5 measurement: with --viewport the view follows the buffer, so
-    // a capture shows what widescreen would look like rather than a strip.
-    // Headless only, and the enemy activation area is untouched, which is
-    // the part that would change the game if it followed along.
-    {
-        int vw = 0, vh = 0;
-        if (abuse::harness::viewport_size(vw, vh))
-            w = Xres - 4;
-    }
+    // A wider buffer means a wider view, not a 4:3 strip drawn in the middle
+    // of one. The buffer is only ever wider than 4:3 when it was asked for:
+    // aspect= in abuserc, which the Original mode ignores, or --viewport,
+    // which is the harness's way in.
+    //
+    // What does *not* follow is the region that wakes enemies up. That one
+    // is pinned to the 4:3 rectangle in Game::tick, through
+    // classic_view_width() and classic_xoff(), and pinning it is what keeps
+    // widescreen from being a different game: seeing further would otherwise
+    // mean fighting sooner, and every replay hash would move.
+    if (Xres - 4 > w)
+        w = Xres - 4;
 
     for (view *f=player_list; f; f=f->next)
     {
