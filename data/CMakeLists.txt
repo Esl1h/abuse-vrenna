@@ -228,11 +228,34 @@ INSTALL(FILES
     defaults.prp
 DESTINATION ${ASSETDIR})
 
-# Check if we have the non-free data
+# The free pack, which is this project's own and is in the repository.
+#
+# Installed by pattern and not by name: the pack is rebuilt by
+# tools/free-sfx/build-pack.py and listing 85 files here would be a second
+# list to keep in step with the first. Only .ogg, which is what the pack is
+# made of; anything else in those directories belongs to whoever put it
+# there and is not ours to package.
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/sfx/
+        DESTINATION ${ASSETDIR}/sfx
+        FILES_MATCHING PATTERN "*.ogg")
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/music/
+        DESTINATION ${ASSETDIR}/music
+        FILES_MATCHING PATTERN "*.ogg")
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/sfx/CREDITS.md)
+    install(FILES sfx/CREDITS.md DESTINATION ${ASSETDIR}/sfx)
+endif()
+
+# Check if we have the non-free data.
+#
+# Asked of a file and not of the directory. Both directories exist now,
+# because the free pack lives in them, and testing the directory made the
+# install go looking for music/intro.hmi and fail: those names are Bobby
+# Prince's, they are not redistributable and they are in no checkout of
+# this repository.
 set(IGNORE_NONFREE off CACHE BOOL "ignore non-free music/SFX even if it exists")
 if(IGNORE_NONFREE)
     message(WARNING "Skipping non-free music (set to ignore)")
-elseif(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/music)
+elseif(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/music/intro.hmi)
     message(WARNING "Non-free music found. Build will include non-free data!")
     INSTALL(FILES
         music/intro.hmi music/victory.hmi
@@ -241,12 +264,12 @@ elseif(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/music)
         music/abuse11.hmi music/abuse13.hmi music/abuse15.hmi music/abuse17.hmi
     DESTINATION ${ASSETDIR}/music)
 else()
-    message(WARNING "Non-free music not found, it will not be included.")
+    message(STATUS "No non-free music here, which is the usual case: the free soundtrack above is what ships.")
 endif()
 
 if(IGNORE_NONFREE)
     message(WARNING "Skipping non-free SFX (set to ignore)")
-elseif(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/sfx)
+elseif(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/sfx/ball01.wav)
     message(WARNING "Non-free sound effects found. Build will include non-free data!")
     INSTALL(FILES
         sfx/adie02.wav sfx/adie03.wav sfx/adie05.wav sfx/ahit01.wav
@@ -281,5 +304,5 @@ elseif(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/sfx)
         sfx/voice/wallss_1.wav sfx/voice/weapon_1.wav
     DESTINATION ${ASSETDIR}/sfx/voice)
 else()
-    message(WARNING "Non-free sound effects not found, sound will not be enabled.")
+    message(STATUS "No non-free sound effects here, which is the usual case: the free pack above is what ships.")
 endif()
