@@ -1083,6 +1083,19 @@ void setup( int argc, char **argv )
     else
         readRCFile();
 
+    // No audio device in a scripted run, for the same reason it reads no
+    // abuserc: a test that touches the machine's audio stack is a test whose
+    // result depends on that machine. Nothing the harness compares has a
+    // sound in it, neither a state hash nor a stored frame.
+    //
+    // This was free until the free pack existed. Without data/sfx, sound_init
+    // gave up at its first check and no device was ever opened; with 73 Vorbis
+    // files there, every replay began opening audio and decoding the pack, and
+    // the Windows runner went past the two minute bound the replay suite
+    // allows and was killed.
+    if( abuse::harness::headless() )
+        flags.nosound = 1;
+
     // Handle command-line parameters
     parseCommandLine( argc, argv );
 
