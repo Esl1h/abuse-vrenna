@@ -117,6 +117,7 @@ add_test(NAME install_tree
     COMMAND ${ABUSE_BASH} ${abuse_SOURCE_DIR}/scripts/check-install.sh
             ${abuse_BINARY_DIR}
     WORKING_DIRECTORY ${abuse_SOURCE_DIR})
+set_tests_properties(install_tree PROPERTIES SKIP_RETURN_CODE 77)
 
 # The free pack against what the game asks for. A missing sound is the
 # quietest failure there is: the game plays on and one event is silent

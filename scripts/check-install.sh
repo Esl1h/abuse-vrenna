@@ -15,6 +15,22 @@ build=${1:?usage: check-install.sh <build dir>}
 root=$(cd -- "$(dirname -- "$0")/.." && pwd)
 cd "$root"
 
+# Linux only, and it exits 77, CTest's skip code, anywhere else.
+#
+# What it checks is the Linux install layout: usr/bin and usr/share/games.
+# Windows installs everything into one directory and macOS builds a bundle,
+# so the same assertions are false there for reasons that have nothing to do
+# with what this is watching for. The first version of this file did not say
+# so and turned both of those jobs red.
+case "$(uname -s)" in
+    Linux) ;;
+    *)
+        echo "not Linux: the install layout this checks is the one the"
+        echo "AppImage, the tarball, the .deb and the .rpm are built from"
+        exit 77
+        ;;
+esac
+
 stage=$(mktemp -d)
 trap 'rm -rf "$stage"' EXIT
 
