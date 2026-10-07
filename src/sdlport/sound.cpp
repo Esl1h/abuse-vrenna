@@ -283,6 +283,16 @@ int sound_init( int argc, char **argv )
     return sound_enabled;
 }
 
+int sound_retry()
+{
+    if (sound_enabled)
+        return sound_enabled;
+
+    // No argv: the only thing sound_init reads from it is the volume
+    // switches, and those were parsed at startup and still hold.
+    return sound_init(0, NULL);
+}
+
 //
 // sound_uninit
 //

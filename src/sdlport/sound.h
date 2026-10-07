@@ -22,6 +22,16 @@
 #define MUSIC_INITIALIZED  2
 
 int sound_init(int argc, char **argv);
+
+// Initialises again, after the sound a run started without has arrived.
+//
+// sound_init runs once, at startup, and gives up with no device at all when
+// it finds no sfx directory. Downloading the original data from inside the
+// game leaves exactly that state behind: the files are there and the mixer
+// is not, so nothing plays until the next launch. This is the way back,
+// and it does nothing when sound is already up.
+int sound_retry();
+
 void sound_uninit();
 void print_sound_options(); // print the options avaible for sound
 

@@ -26,8 +26,11 @@
 #include "i18n/uitext.h"
 #include "jwindow.h"
 #include "keys.h"
+#include "loader2.h"
 #include "menu_list.h"
 #include "overlay.h"
+#include "sdlport/sound.h"
+#include "specs.h"
 
 extern WindowManager *wm;
 
@@ -59,6 +62,27 @@ bool fetcher_here()
     return yes;
 }
 
+// Puts the data that just arrived to use, without a restart.
+//
+// sound_init ran at startup, found no sfx directory and gave up with no
+// device at all, so a download that works still leaves the game mute: the
+// files are there and the mixer is not. Two things fix that, and both have
+// to happen here because setup() is long past.
+void use_what_arrived()
+{
+    // Where the Original mode's sound lives. open_file consults this
+    // overlay, and it is what setup() sets when the data was already
+    // installed at startup.
+    char *classic = SDL_strdup(data::classic_data_dir().c_str());
+    set_fallback_filename_prefix(classic);
+    SDL_free(classic);
+
+    sound_avail = sound_retry();
+    if (!(sound_avail & SFX_INITIALIZED))
+        printf("Classic data: downloaded, and sound did not come up; "
+               "restarting the game will use it\n");
+}
+
 // Runs the download and keeps drawing while it runs.
 //
 // Its own loop, because the one below waits for an event and a download
@@ -77,8 +101,13 @@ void run_fetch(int selected)
         data::FetchState const state = data::fetch_poll();
         if (state != data::FetchState::Running)
         {
-            g_result = state == data::FetchState::Done ? &i18n::kClassicGot
-                                                       : &i18n::kClassicFailed;
+            if (state == data::FetchState::Done)
+            {
+                g_result = &i18n::kClassicGot;
+                use_what_arrived();
+            }
+            else
+                g_result = &i18n::kClassicFailed;
             return;
         }
 
