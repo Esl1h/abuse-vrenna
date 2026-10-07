@@ -19,12 +19,18 @@ struct flags_struct
     short xres;
     short yres;
 
-    // Whether the Remastered mode may borrow the original sound when the
-    // player has installed it. On, because the mode ships none of its own
-    // and a mute game is worse than a borrowed one; classicsfx=off in
-    // abuserc turns it back off. Never applies to what is distributed:
-    // this is the player's own copy of data they downloaded themselves.
-    bool classic_sfx = true;
+    // Whether the Remastered mode plays the original sound where the player
+    // has installed it, instead of the free pack that ships with the game.
+    //
+    // Off, which is the opposite of what it was: it defaulted to on when the
+    // mode had no sound of its own and a mute game was worse than a borrowed
+    // one. The mode has 73 effects and 12 tracks now, and borrowing over them
+    // would hide what the game ships with. The player chooses, in the options
+    // or with classicsfx=on in abuserc.
+    //
+    // Never applies to what is distributed: this is the player's own copy of
+    // data they downloaded themselves.
+    bool classic_sfx = false;
 };
 
 struct keys_struct

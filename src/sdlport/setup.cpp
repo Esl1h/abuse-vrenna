@@ -86,28 +86,6 @@ bool classic_sound_installed()
     return std::filesystem::is_directory(sfx, ec);
 }
 
-// Whether this build ships a free pack of its own, which is what decides
-// whether the Remastered mode borrows the original one. A pack is any .ogg
-// under the data directory's sfx/, because that is what the free pack is:
-// the names the Lisp asks for, with a format the mixer also takes.
-bool free_sound_installed()
-{
-    char const *prefix = get_filename_prefix();
-    std::filesystem::path const sfx =
-        std::filesystem::path(prefix ? prefix : "") / "sfx";
-
-    std::error_code ec;
-    if (!std::filesystem::is_directory(sfx, ec))
-        return false;
-
-    for (auto const &entry : std::filesystem::directory_iterator(sfx, ec))
-    {
-        if (entry.is_regular_file(ec) && entry.path().extension() == ".ogg")
-            return true;
-    }
-    return false;
-}
-
 }
 
 // Only when the player has not chosen one does the system locale get a say.
@@ -264,7 +242,7 @@ void createRCFile( char *rcfile )
         fputs( "; The Remastered mode has no sound of its own yet. When the\n", fd );
         fputs( "; original data is installed it borrows the sound and music\n", fd );
         fputs( "; from it, played exactly as they are. Off leaves it silent.\n", fd );
-        fputs( ";classicsfx=off\n\n", fd );
+        fputs( ";classicsfx=on\n\n", fd );
         fputs( "; Sparks off a hit and an ejected casing off a shot.\n", fd );
         fputs( ";particles=off\n\n", fd );
         fputs( "; Shots and explosions light the room around them, in the\n", fd );
@@ -1138,18 +1116,14 @@ void setup( int argc, char **argv )
         abuse::hd::set_enabled( false );
     }
     else if( flags.classic_sfx && !abuse::harness::headless()
-             && !free_sound_installed()
              && classic_sound_installed() )
     {
-        // Borrowed only where there is nothing of our own. The Remastered
-        // mode shipped no sound at all until the free pack existed, and a
-        // mute game was the loudest thing missing from it; with a pack in
-        // data/sfx/ the borrowing would bury it, because the overlay is
-        // consulted first.
+        // Asked for, and not guessed at. The overlay is consulted first, so
+        // every sound the original has wins and the free pack fills in what
+        // it does not: that is the whole of "original sound" as a choice.
         //
-        // If the player has installed the original data and there is no
-        // free pack, it is theirs and it is right here, so the overlay goes
-        // on: the sound and music come from it and nothing else does.
+        // It is the player's own copy of data they downloaded themselves,
+        // which is the only reason this is allowed to exist at all.
         //
         // Nothing is converted, resampled or written; the files are played
         // exactly as they are, which is the rule that protects them.
@@ -1160,8 +1134,8 @@ void setup( int argc, char **argv )
         char *classic = SDL_strdup(abuse::data::classic_data_dir().c_str());
         set_fallback_filename_prefix( classic );
         SDL_free( classic );
-        printf( "Sound: borrowing the original set from %s\n"
-                "       (classicsfx=off in abuserc leaves the mode silent)\n",
+        printf( "Sound: the original set, from %s\n"
+                "       (classicsfx=off goes back to the free pack)\n",
                 abuse::data::classic_data_dir().c_str() );
     }
 

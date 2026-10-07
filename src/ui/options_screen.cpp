@@ -44,6 +44,11 @@
 
 extern WindowManager *wm;
 
+// Declared here and not in a header because that is how every other file in
+// this engine reaches it: setup.cpp defines it, and video, event and sound
+// each say so for themselves.
+extern flags_struct flags;
+
 namespace abuse::ui {
 
 namespace {
@@ -514,6 +519,35 @@ void cursor_show(char *buf, size_t n)
     snprintf(buf, n, "%d", input::cursor_settings().speed);
 }
 
+// ---- which sound set ------------------------------------------------------
+
+// Free pack or the 1995 one, where the player has installed the 1995 one.
+//
+// Next launch, like the mode: the overlay that serves the original sound is
+// set once, before the data directory is read, and sounds already loaded
+// would keep playing from wherever they came from.
+void sound_set_step(int)
+{
+    flags.classic_sfx = !flags.classic_sfx;
+}
+
+void sound_set_show(char *buf, size_t n)
+{
+    // Said plainly when the choice has no teeth: the row stays visible so
+    // the player learns the original can be had, and the classic data
+    // screen is where it is fetched.
+    if (!data::classic_data_present())
+        snprintf(buf, n, "%s", say(i18n::kSoundNotHere));
+    else
+        snprintf(buf, n, "%s", say(flags.classic_sfx ? i18n::kSoundClassic
+                                                     : i18n::kSoundFree));
+}
+
+void sound_set_value(char *buf, size_t n)
+{
+    snprintf(buf, n, "%s", flags.classic_sfx ? "on" : "off");
+}
+
 // The value written to the config is the shown one for everything whose
 // display is already the config syntax.
 void same_as_shown(char *buf, size_t n) { (void)buf; (void)n; }
@@ -521,6 +555,7 @@ void same_as_shown(char *buf, size_t n) { (void)buf; (void)n; }
 Item const kItems[] = {
     { i18n::kOptMode,        "mode",        true,  mode_step,     mode_show,     mode_value },
     { i18n::kOptAspect,      "aspect",      true,  aspect_step,   aspect_show,   aspect_value },
+    { i18n::kOptSound,       "classicsfx",  true,  sound_set_step, sound_set_show, sound_set_value },
     { i18n::kOptHud,         "hud",         false, hud_step,      hud_show,      hud_value },
     { i18n::kOptSmooth,      "interpolate", false, smooth_step,   smooth_show,   smooth_value },
     { i18n::kOptPreset,      "preset",      true,  preset_step,    preset_show,    preset_value },

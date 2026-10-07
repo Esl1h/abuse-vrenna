@@ -51,6 +51,12 @@ inline constexpr Phrase kOptMode        = { "Mode", "Modo" };
 inline constexpr Phrase kModeOriginal   = { "Original", "Original" };
 inline constexpr Phrase kModeRemaster   = { "Remastered", "Remasterizado" };
 inline constexpr Phrase kOptAspect      = { "Picture shape", "Formato da imagem" };
+inline constexpr Phrase kOptSound       = { "Sound set", "Conjunto de som" };
+inline constexpr Phrase kSoundFree      = { "free", "livre" };
+inline constexpr Phrase kSoundClassic   = { "original 1995", "original de 1995" };
+inline constexpr Phrase kSoundNotHere   = { "free (the 1995 one is not installed)",
+                                            "livre (o de 1995 n\xe3o est\xe1 instalado)" };
+
 inline constexpr Phrase kOptHud         = { "HUD", "HUD" };
 inline constexpr Phrase kHudClassic     = { "classic", "cl\xe1" "ssico" };
 inline constexpr Phrase kHudModern      = { "modern", "moderno" };
