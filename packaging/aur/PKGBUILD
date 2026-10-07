@@ -11,8 +11,8 @@ pkgname=abuse-vrenna
 # Arch forbids a hyphen in pkgver, and the tag has one. _tag is what the
 # release is called; pkgver is what pacman compares, and 0.9.0alpha.0 sorts
 # before 0.9.0, which is what a pre-release should do.
-_tag=v0.9.0-alpha.1
-pkgver=0.9.0alpha.1
+_tag=v0.9.0-alpha.2
+pkgver=0.9.0alpha.2
 pkgrel=1
 pkgdesc="Modern port of Abuse (1995), the run-and-gun side-scroller with free aiming"
 arch=('x86_64' 'aarch64')

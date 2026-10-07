@@ -89,6 +89,19 @@
   </screenshots>
 
   <releases>
+    <release version="0.9.0-alpha.2" date="2026-10-07" type="development">
+      <description>
+        <p>
+          The original sound and music can be fetched from inside the game,
+          and the Remastered mode lets you choose which set it plays.
+        </p>
+        <ul>
+          <li>A download button on the screen that asks for the original data</li>
+          <li>Sound comes up straight after it, with no restart</li>
+          <li>An options row: the free pack, or the 1995 one where it is installed</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.9.0-alpha.1" date="2026-09-27" type="development">
       <description>
         <p>

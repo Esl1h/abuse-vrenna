@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # by its own plan, which is v0.9.0-alpha.N while the phases close and 1.0.0
 # when they are done. A tag and the number the game prints have to be the
 # same string, or the bug report says a version nobody can check out.
-set(abuse_VERSION 0.9.0-alpha.1)
+set(abuse_VERSION 0.9.0-alpha.2)
 set(abuse_VERSION_MAJOR 0)
 set(abuse_VERSION_MINOR 9)
 set(abuse_VERSION_PATCH 0)
