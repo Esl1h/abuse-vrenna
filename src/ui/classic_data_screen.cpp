@@ -21,6 +21,7 @@
 
 #include <SDL3/SDL.h>
 
+#include "data/fetch_classic.h"
 #include "data/paths.h"
 #include "i18n/uitext.h"
 #include "jwindow.h"
@@ -38,14 +39,67 @@ using i18n::say;
 
 enum Choice
 {
+    Fetch,
     OpenPage,
     PlayAnyway,
     ChoiceCount
 };
 
-// Set once the player has asked for the page, so the screen can say what
+// Set once the player has asked for something, so the screen can say what
 // happened instead of looking like nothing did.
 i18n::Phrase const *g_result = nullptr;
+
+// Whether there is a fetcher to run at all. Asked once: a screen that
+// offers a choice which cannot work is worse than one that does not offer
+// it, and in a build with no script the player still has the page and the
+// address.
+bool fetcher_here()
+{
+    static bool const yes = !data::fetch_script().empty();
+    return yes;
+}
+
+// Runs the download and keeps drawing while it runs.
+//
+// Its own loop, because the one below waits for an event and a download
+// that prints a line every few seconds would freeze the screen between
+// them. Events are taken only when there are any, so Esc still answers.
+void run_fetch(int selected)
+{
+    if (!data::fetch_start())
+    {
+        g_result = &i18n::kClassicFailed;
+        return;
+    }
+
+    for (;;)
+    {
+        data::FetchState const state = data::fetch_poll();
+        if (state != data::FetchState::Running)
+        {
+            g_result = state == data::FetchState::Done ? &i18n::kClassicGot
+                                                       : &i18n::kClassicFailed;
+            return;
+        }
+
+        draw_classic_data_screen(selected);
+        wm->flush_screen();
+
+        while (wm->IsPending())
+        {
+            Event ev;
+            wm->get_event(ev);
+            if (ev.type == EV_KEY && ev.key == JK_ESC)
+            {
+                data::fetch_reset();
+                g_result = &i18n::kClassicFailed;
+                return;
+            }
+        }
+
+        SDL_Delay(30);
+    }
+}
 
 }
 
@@ -60,6 +114,7 @@ void draw_classic_data_screen(int selected)
     // enough to dominate the panel width, and a wide panel is a small one,
     // because the text shrinks until it fits.
     Row rows[ChoiceCount];
+    rows[Fetch].label = say(i18n::kClassicFetch);
     rows[OpenPage].label = say(i18n::kClassicOpen);
     rows[PlayAnyway].label = say(i18n::kClassicGoOn);
 
@@ -67,14 +122,25 @@ void draw_classic_data_screen(int selected)
     // a temporary would be dangling by the time the list is drawn.
     std::string where = data::classic_data_dir();
 
-    char const *footers[6];
+    char const *footers[8];
     int n = 0;
     footers[n++] = say(i18n::kClassicWhy1);
     footers[n++] = say(i18n::kClassicWhy2);
     footers[n++] = data::classic_data_url();
     footers[n++] = say(i18n::kClassicScript);
     footers[n++] = where.c_str();
-    if (g_result)
+
+    // While it runs, what the script is saying, which is the only honest
+    // progress report available: it prints a line per file.
+    if (data::fetch_poll() == data::FetchState::Running)
+    {
+        footers[n++] = say(i18n::kClassicFetching);
+        footers[n++] = say(i18n::kClassicCancel);
+        char const *line = data::fetch_message();
+        if (line[0])
+            footers[n - 1] = line;
+    }
+    else if (g_result)
         footers[n++] = say(*g_result);
 
     draw_list(say(i18n::kClassicTitle), rows, ChoiceCount, selected, footers, n);
@@ -106,7 +172,20 @@ void run_classic_data_screen()
             break;
         case JK_ENTER:
         case JK_SPACE:
-            if (selected == OpenPage)
+            if (selected == Fetch)
+            {
+                if (fetcher_here())
+                {
+                    run_fetch(selected);
+                    // The mode can start now, and nothing else on this
+                    // screen matters once it can.
+                    if (!classic_data_missing())
+                        quit = true;
+                }
+                else
+                    g_result = &i18n::kClassicFailed;
+            }
+            else if (selected == OpenPage)
             {
                 // The whole of the download feature. A browser is a thing every
                 // desktop has, and this needs no library that the game would

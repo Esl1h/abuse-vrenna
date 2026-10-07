@@ -114,6 +114,19 @@ inline constexpr Phrase kClassicOpened  = { "opened in your browser",
 inline constexpr Phrase kClassicNoOpen  = { "no browser opened; the address is above",
                                             "nenhum navegador abriu; o endere\xe7o est\xe1 acima" };
 
+// The download, run from here. The script is the one the packages carry;
+// this only starts it and shows what it says.
+inline constexpr Phrase kClassicFetch   = { "Download it now",
+                                            "Baixar agora" };
+inline constexpr Phrase kClassicFetching = { "downloading, this takes a minute",
+                                             "baixando, leva um minuto" };
+inline constexpr Phrase kClassicCancel  = { "Esc cancels the download",
+                                            "Esc cancela o download" };
+inline constexpr Phrase kClassicGot     = { "done: the Original mode has its sound",
+                                            "pronto: o Modo Original tem o som dele" };
+inline constexpr Phrase kClassicFailed  = { "it did not finish; nothing was written",
+                                            "n\xe3o terminou; nada foi escrito" };
+
 // ---- start menu -----------------------------------------------------------
 
 inline constexpr Phrase kStartResume    = { "Resume", "Voltar ao jogo" };
