@@ -48,6 +48,17 @@ FetchState run_to_end()
 
 }
 
+TEST_CASE("the destination carries no trailing slash") {
+    // classic_data_dir() ends in one, because elsewhere it is a prefix and
+    // the slash belongs. As an argument it is poison: the script renames
+    // "$dest" to "$dest.previous.$$" for its atomic write, and with the
+    // slash that name is inside the directory being moved. mv refuses,
+    // after the download and the checksums have already passed.
+    std::string const dest = abuse::data::fetch_destination();
+    REQUIRE(!dest.empty());
+    CHECK(dest.back() != '/');
+}
+
 TEST_CASE("the script is found through the override") {
     std::string const path = write_script("fake-fetch.sh", "exit 0\n");
     CHECK(abuse::data::fetch_script() == path);

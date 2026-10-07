@@ -44,7 +44,13 @@ enum class FetchState
 // because an option that cannot work should not be on screen.
 std::string fetch_script();
 
-// Starts it, writing into classic_data_dir(). False when it could not be
+// Where the fetcher is told to write: classic_data_dir() without its
+// trailing slash. That slash belongs where the path is used as a prefix and
+// is poison as an argument, because the script's atomic rename then names a
+// directory inside the one it is moving.
+std::string fetch_destination();
+
+// Starts it, writing into fetch_destination(). False when it could not be
 // started at all, which leaves the state Idle.
 bool fetch_start();
 

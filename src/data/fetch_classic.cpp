@@ -89,6 +89,14 @@ std::string fetch_script()
     return std::string();
 }
 
+std::string fetch_destination()
+{
+    std::string dest = classic_data_dir();
+    while (dest.size() > 1 && dest.back() == '/')
+        dest.pop_back();
+    return dest;
+}
+
 bool fetch_start()
 {
     if (g_state == FetchState::Running)
@@ -98,7 +106,7 @@ bool fetch_start()
     if (script.empty())
         return false;
 
-    std::string const dest = classic_data_dir();
+    std::string const dest = fetch_destination();
     char const *args[] = { script.c_str(), dest.c_str(), nullptr };
 
     fetch_reset();
