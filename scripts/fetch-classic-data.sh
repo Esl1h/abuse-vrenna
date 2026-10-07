@@ -15,6 +15,18 @@ base=${ABUSE_CLASSIC_URL:-http://abuse.zoy.org/raw-attachment/wiki/download}
 
 dest=${1:-${XDG_DATA_HOME:-$HOME/.local/share}/abuse/classic}
 
+# Without a trailing slash, whatever was passed.
+#
+# The atomic write at the end moves "$dest" to "$dest.previous.$$", and with
+# a slash on the end that name lands *inside* the directory being moved:
+# mv refuses, "cannot move to a subdirectory of itself", after everything
+# has already been downloaded and checked. The game passes the path it uses
+# as a prefix elsewhere, where the slash belongs, and that is how this was
+# found.
+while [ "$dest" != "/" ] && [ "${dest%/}" != "$dest" ]; do
+    dest=${dest%/}
+done
+
 # The checksums are looked for in the three places this script is ever run
 # from, in order: a checkout, an installed tree, and a directory where the
 # game and its data sit together.
