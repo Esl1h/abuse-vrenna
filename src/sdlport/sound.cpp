@@ -252,7 +252,17 @@ int sound_init( int argc, char **argv )
     // (SDL_audio.h, "One other benefit of logical devices"). Asking for a
     // particular device would buy a settings row and lose that, and the
     // game would go silent the moment someone plugged anything in.
-    mixer = MIX_CreateMixerDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &audiospec);
+    //
+    // The buffer is the part of the delay this game controls. A sound here
+    // answers something on screen, a shot or a hit, so whatever the buffer
+    // holds is the gap a player calls "late". SDL's own choice for 44.1 kHz
+    // is 1024 frames, 23 ms on PipeWire, and the server adds its own on top;
+    // 512 halves ours. At the default priority, so SDL_AUDIO_DEVICE_SAMPLE_FRAMES
+    // in the environment still wins, which is the way back on a machine
+    // that crackles.
+    SDL_SetHintWithPriority( SDL_HINT_AUDIO_DEVICE_SAMPLE_FRAMES, "512",
+                             SDL_HINT_DEFAULT );
+    mixer =MIX_CreateMixerDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &audiospec);
     if (mixer == NULL)
     {
         printf( "Sound: Unable to open audio - %s\nSound: Disabled (error)\n", SDL_GetError() );
