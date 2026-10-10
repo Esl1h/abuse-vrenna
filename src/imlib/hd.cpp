@@ -32,6 +32,11 @@
 
 extern palette *pal;
 
+// The palette as it was before the brightness calibration, which gamma.cpp
+// keeps while `pal` holds the corrected copy. Null until the calibration has
+// run.
+extern palette *old_pal;
+
 namespace abuse::hd {
 
 namespace {
@@ -265,6 +270,14 @@ image *load(char const *path, int want_w, int want_h)
 
     image *out = new image(ivec2(w, h));
 
+    // Matched against the palette before the calibration, not the corrected
+    // one. The screen shows these indices through the corrected palette, so
+    // a match made against that same palette is undone by it: the picture
+    // comes out as the artist painted it whatever the player calibrated, and
+    // the Remastered mode's title and menu stayed bright while every
+    // original sprite obeyed the setting.
+    palette *const source = old_pal ? old_pal : pal;
+
     // Back to palette indices. Colour 0 is the transparent one throughout
     // the engine, so anything mostly see-through becomes that rather than
     // the nearest colour to whatever was underneath it.
@@ -276,7 +289,7 @@ image *load(char const *path, int want_w, int want_h)
         for (int x = 0; x < w; x++, src += 4)
             dst[x] = src[3] < 128
                          ? 0
-                         : (uint8_t)pal->find_closest(src[0], src[1], src[2]);
+                         : (uint8_t)source->find_closest(src[0], src[1], src[2]);
     }
 
     stbi_image_free(pixels);
