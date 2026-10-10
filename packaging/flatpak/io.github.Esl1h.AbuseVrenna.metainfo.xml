@@ -89,6 +89,21 @@
   </screenshots>
 
   <releases>
+    <release version="0.9.0-alpha.3" date="2026-10-10" type="development">
+      <description>
+        <p>
+          Fixes from the first run of the packages: no sound in the AppImage,
+          a title screen that ignored the brightness setting, and no way to
+          get the original sound from the Remastered mode.
+        </p>
+        <ul>
+          <li>The AppImage plays its sound</li>
+          <li>The title and menu follow the brightness calibration</li>
+          <li>A start menu row that downloads the original sound, in any mode</li>
+          <li>A smaller sound buffer, for less delay after what happens on screen</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.9.0-alpha.2" date="2026-10-07" type="development">
       <description>
         <p>
