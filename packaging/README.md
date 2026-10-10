@@ -44,6 +44,14 @@ a manifest nobody runs cannot show:
 - What is bundled must be filtered out of the package's own dependencies,
   or dnf asks the system for a library only this package has.
 
+A sixth turned up only when a person played the AppImage, on 2026-10-09: it
+found its levels and art but had no sound. `ABUSE_PATH` was read after
+`sound_init`, which looks for `sfx/` under the baked-in prefix and gives up
+with no device when it is not there. The Flatpak never showed it, because its
+prefix is the real one. `scripts/check-install.sh` now starts the installed
+game with a wrong prefix and `ABUSE_PATH` set and expects `Sound: Enabled`;
+`--headless` cannot see this, because it switches sound off.
+
 Debian 13 ships SDL3 3.2, older than the 3.4 the pinned SDL3_mixer needs, so
 there CPM builds SDL3 as well and both libraries travel inside the package.
 On Fedora and Arch the system SDL3 is used and only the mixer travels.
