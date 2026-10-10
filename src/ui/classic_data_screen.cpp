@@ -29,10 +29,12 @@
 #include "loader2.h"
 #include "menu_list.h"
 #include "overlay.h"
+#include "sdlport/setup.h"
 #include "sdlport/sound.h"
 #include "specs.h"
 
 extern WindowManager *wm;
+extern flags_struct flags;
 
 namespace abuse::ui {
 
@@ -73,9 +75,17 @@ void use_what_arrived()
     // Where the Original mode's sound lives. open_file consults this
     // overlay, and it is what setup() sets when the data was already
     // installed at startup.
-    char *classic = SDL_strdup(data::classic_data_dir().c_str());
-    set_fallback_filename_prefix(classic);
-    SDL_free(classic);
+    //
+    // Only when that sound is what the player asked for. The overlay wins
+    // over the free pack for every file the original has, so setting it
+    // from the Remastered mode would swap the sound under a player who
+    // chose the free one, and the next launch would swap it back.
+    if (data::mode() == data::Mode::Original || flags.classic_sfx)
+    {
+        char *classic = SDL_strdup(data::classic_data_dir().c_str());
+        set_fallback_filename_prefix(classic);
+        SDL_free(classic);
+    }
 
     sound_avail = sound_retry();
     if (!(sound_avail & SFX_INITIALIZED))
@@ -172,7 +182,9 @@ void draw_classic_data_screen(int selected)
     else if (g_result)
         footers[n++] = say(*g_result);
 
-    draw_list(say(i18n::kClassicTitle), rows, ChoiceCount, selected, footers, n);
+    draw_list(say(data::mode() == data::Mode::Original
+                      ? i18n::kClassicTitle : i18n::kClassicTitleOptional),
+              rows, ChoiceCount, selected, footers, n);
 }
 
 void run_classic_data_screen()
@@ -206,9 +218,13 @@ void run_classic_data_screen()
                 if (fetcher_here())
                 {
                     run_fetch(selected);
-                    // The mode can start now, and nothing else on this
-                    // screen matters once it can.
-                    if (!classic_data_missing())
+                    // The data is here, and nothing else on this screen
+                    // matters once it is. Asked of the disk and not of
+                    // classic_data_missing(), which is only ever true in
+                    // the Original mode: from any other mode it answered
+                    // "not missing" before the download had even run, and
+                    // the screen closed on a failure without saying so.
+                    if (data::classic_data_present())
                         quit = true;
                 }
                 else

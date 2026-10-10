@@ -19,8 +19,9 @@
 
 namespace abuse::ui {
 
-// Shows it and runs until the player leaves. Only ever called when the mode is
-// Original and the sound is missing.
+// Shows it and runs until the player leaves. Called at startup when the mode is
+// Original and the sound is missing, and from the start menu in any mode while
+// the original sound is not installed.
 void run_classic_data_screen();
 
 // Draws one frame of it, for a scripted capture.

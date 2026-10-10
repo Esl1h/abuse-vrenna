@@ -18,6 +18,7 @@
 #include <string.h>
 
 #include "cache.h"
+#include "classic_data_screen.h"
 #include "compat.h"
 #include "clisp.h"
 #include "data/paths.h"
@@ -62,6 +63,7 @@ enum Action
     ActMode,
     ActBrightness,
     ActVolume,
+    ActOriginalSound,
     ActOptions,
     ActControls,
     ActCredits,
@@ -167,6 +169,17 @@ int build_rows(Row *rows, Action *acts)
 
     rows[n].label = say(i18n::kStartVolume);
     acts[n++] = ActVolume;
+
+    // Until the original sound is on the disk, in whichever mode. The
+    // Remastered mode plays its free pack without it, so nothing else would
+    // ever tell the player the 1995 one can be had. A pinned frame counts it
+    // as missing: it cannot ask the disk, and the frame has to come out the
+    // same on every machine.
+    if (g_pinned || !data::classic_data_present())
+    {
+        rows[n].label = say(i18n::kStartOriginalSound);
+        acts[n++] = ActOriginalSound;
+    }
 
     rows[n].label = say(i18n::kOptionsTitle);
     acts[n++] = ActOptions;
@@ -408,6 +421,10 @@ StartAction run_start_menu()
         case ActVolume:
             overlay().Clear();
             show_volume_window();
+            break;
+        case ActOriginalSound:
+            overlay().Clear();
+            run_classic_data_screen();
             break;
         case ActOptions:
             run_options_screen();

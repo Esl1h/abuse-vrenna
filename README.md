@@ -176,6 +176,9 @@ the menu, or from the command line:
 On Windows: `powershell -ExecutionPolicy Bypass -File scripts\fetch-classic-data.ps1`,
 which does the same thing and puts the data where that platform looks for it.
 
+From inside the game, in any mode, **Get original sound** on the start menu
+runs the same download. It is there until the original sound is installed.
+
 The menu writes the choice down, so it survives the next launch.
 
 Those files are not redistributable, which is why the script downloads them

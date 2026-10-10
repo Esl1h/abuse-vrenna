@@ -78,7 +78,7 @@ TEST_CASE("every phrase has both columns filled") {
         kOptCursorSpeed, kControlsTitle, kControlsHelp, kPressAny, kUnbound,
         kNoRoomForMore, kActMoveLeft, kActMoveRight, kActUp, kActDown, kActFire,
         kActSpecial, kActWeaponPrev, kActWeaponNext, kPadLost, kPadLostHelp,
-        kMenuHint,
+        kMenuHint, kStartOriginalSound, kClassicTitleOptional,
     };
 
     for (Phrase const &p : all)

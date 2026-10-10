@@ -105,6 +105,10 @@ inline constexpr Phrase kActWeaponNext  = { "Next weapon", "Pr\xf3xima arma" };
 
 inline constexpr Phrase kClassicTitle   = { "The Original mode needs the classic sound",
                                             "O Modo Original precisa do som original" };
+// The same screen reached from the Remastered mode, where nothing is missing:
+// the free pack plays, and the 1995 one is an option the player may want.
+inline constexpr Phrase kClassicTitleOptional = { "Get the original 1995 sound",
+                                                  "Baixar o som original de 1995" };
 inline constexpr Phrase kClassicWhy1    = { "Levels, art and code ship with the game.",
                                             "Fases, arte e c\xf3" "digo v\xeam com o jogo." };
 inline constexpr Phrase kClassicWhy2    = { "The sound and the music do not, so they come apart.",
@@ -143,6 +147,8 @@ inline constexpr Phrase kStartBrightness= { "Brightness", "Brilho" };
 inline constexpr Phrase kStartVolume    = { "Volume", "Volume" };
 inline constexpr Phrase kStartCredits   = { "Credits", "Cr\xe9" "ditos" };
 inline constexpr Phrase kStartQuit      = { "Quit", "Sair" };
+inline constexpr Phrase kStartOriginalSound = { "Get original sound",
+                                                "Baixar som original" };
 inline constexpr Phrase kStartHelp      = { "arrows move, Enter chooses",
                                             "setas movem, Enter escolhe" };
 
