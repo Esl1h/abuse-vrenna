@@ -2882,13 +2882,18 @@ int main(int argc, char *argv[])
 
     show_startup();
 
+    // Before the sound starts, not after: sound_init looks for sfx/ under the
+    // prefix and gives up with no device at all when it is not there. The
+    // AppImage sets this because its prefix, baked in at configure time, is
+    // /usr/share/games/abuse and the data lives under the mount point, so
+    // with the override applied late the game found its levels and art but
+    // started with no sound.
+    if (getenv("ABUSE_PATH"))
+        set_filename_prefix(getenv("ABUSE_PATH"));
+
     start_sound(argc, argv);
 
     stat_man = new text_status_manager();
-
-    // look to see if we are supposed to fetch the data elsewhere
-    if (getenv("ABUSE_PATH"))
-        set_filename_prefix(getenv("ABUSE_PATH"));
 
     // look to see if we are supposed to save the data elsewhere
     if (getenv("ABUSE_SAVE_PATH"))

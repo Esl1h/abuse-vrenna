@@ -217,16 +217,19 @@ int sound_init( int argc, char **argv )
     if( (fd = fopen( sfxdir,"r" )) == NULL )
 #endif
     {
-        // Didn't find the directory, so disable sound. Not an error: the
-        // Remastered mode has no free sound set yet, which is phase 5, and
-        // the Original mode has one the moment its data is installed.
+        // Didn't find the directory, so disable sound. Not an error for the
+        // Original mode, which has sound the moment its data is installed.
+        // The Remastered mode ships its own, so there the path is the
+        // useful part: a build whose data prefix is wrong says exactly
+        // that and nothing else.
         if( abuse::data::mode() == abuse::data::Mode::Original )
             printf( "Sound: none yet. Original mode looks in %s;\n"
                     "       run scripts/fetch-classic-data.sh to install it.\n",
                     sfxdir );
         else
-            printf( "Sound: none yet. The Remastered mode has no free sound\n"
-                    "       set so far; --mode original uses the classic one.\n" );
+            printf( "Sound: no sfx directory at %s\n"
+                    "       (the data directory is wrong, or the free pack is missing)\n",
+                    sfxdir );
         SDL_free( sfxdir );
         return 0;
     }
