@@ -46,6 +46,15 @@ FetchState run_to_end()
     return FetchState::Running;
 }
 
+// The fetcher is a POSIX shell script, and SDL_CreateProcess on Windows has
+// nothing to run it with. The Windows player runs fetch-classic-data.ps1
+// instead, so the plumbing these cases test does not exist there yet.
+#ifdef _WIN32
+constexpr bool kNoShell = true;
+#else
+constexpr bool kNoShell = false;
+#endif
+
 }
 
 TEST_CASE("the destination carries no trailing slash") {
@@ -65,7 +74,7 @@ TEST_CASE("the script is found through the override") {
     abuse::data::fetch_reset();
 }
 
-TEST_CASE("what the script prints comes back, and it ends") {
+TEST_CASE("what the script prints comes back, and it ends" * doctest::skip(kNoShell)) {
     write_script("fake-fetch-talks.sh",
                  "echo 'downloading abuse-sfx-2.00.tar.gz'\n"
                  "echo '  hash ok'\n"
@@ -82,7 +91,7 @@ TEST_CASE("what the script prints comes back, and it ends") {
     abuse::data::fetch_reset();
 }
 
-TEST_CASE("a script that fails is a failure") {
+TEST_CASE("a script that fails is a failure" * doctest::skip(kNoShell)) {
     write_script("fake-fetch-fails.sh",
                  "echo 'FAIL: could not download' >&2\n"
                  "exit 1\n");
@@ -92,7 +101,7 @@ TEST_CASE("a script that fails is a failure") {
     abuse::data::fetch_reset();
 }
 
-TEST_CASE("reset leaves nothing behind") {
+TEST_CASE("reset leaves nothing behind" * doctest::skip(kNoShell)) {
     write_script("fake-fetch-slow.sh", "sleep 5\n");
 
     REQUIRE(abuse::data::fetch_start());
