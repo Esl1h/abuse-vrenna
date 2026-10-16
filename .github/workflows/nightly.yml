@@ -53,6 +53,10 @@ jobs:
       - name: Replays under the sanitizers
         env:
           ASAN_OPTIONS: detect_leaks=0
+          # The played replay takes about 30s under ASan on a desktop and
+          # four times that on a runner, which the default 120s bound cuts
+          # off on most nights.
+          ABUSE_RUN_TIMEOUT: 600
         run: ./scripts/test-replays.sh ./build/asan/src/abuse
 
       - name: Unit tests under the sanitizers
