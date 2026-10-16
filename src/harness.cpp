@@ -980,7 +980,7 @@ bool draw_overlay_for_capture()
         abuse::ui::draw_language_screen(0, abuse::ui::draw_language_backdrop());
     }
     else
-        abuse::ui::draw_options_screen(0);
+        abuse::ui::draw_options_screen_pinned(0);
     return true;
 }
 

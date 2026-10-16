@@ -32,6 +32,10 @@ void draw_rebind_screen(int selected, bool capturing);
 // Separate so a scripted run can capture it.
 void draw_options_screen(int selected);
 
+// The same, with whether the original data is on this host's disk pinned to
+// "no". A golden frame has to look the same on every machine that records it.
+void draw_options_screen_pinned(int selected);
+
 // How many rows the screen has, for tests and for the scripted capture.
 int options_item_count();
 

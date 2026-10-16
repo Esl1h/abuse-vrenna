@@ -53,6 +53,9 @@ namespace abuse::ui {
 
 namespace {
 
+// See draw_options_screen_pinned.
+bool g_pinned = false;
+
 // One row of the screen. `step` moves the value by one notch in `dir`, and
 // `show` writes what to print for it.
 struct Item
@@ -535,8 +538,10 @@ void sound_set_show(char *buf, size_t n)
 {
     // Said plainly when the choice has no teeth: the row stays visible so
     // the player learns the original can be had, and the classic data
-    // screen is where it is fetched.
-    if (!data::classic_data_present())
+    // screen is where it is fetched. A pinned frame counts it as missing, as
+    // the start menu does: the frame has to come out the same on every
+    // machine.
+    if (g_pinned || !data::classic_data_present())
         snprintf(buf, n, "%s", say(i18n::kSoundNotHere));
     else
         snprintf(buf, n, "%s", say(flags.classic_sfx ? i18n::kSoundClassic
@@ -714,6 +719,13 @@ void draw_options_screen(int selected)
 
     char const *footers[2] = { say(i18n::kOptionsHelp), say(i18n::kRestartNote) };
     draw_list(say(i18n::kOptionsTitle), rows, kItemCount, selected, footers, 2);
+}
+
+void draw_options_screen_pinned(int selected)
+{
+    g_pinned = true;
+    draw_options_screen(selected);
+    g_pinned = false;
 }
 
 
