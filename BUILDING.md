@@ -34,7 +34,7 @@ CMake and WiX can both be installed individually or via the [Chocolatey package 
 
     choco install cmake wixtoolset
 
-SDL3 and SDL3_mixer are automatically downloaded and built via CPM (C++ Package Manager) during the CMake configuration step. The `vcpkg.json` file in the repository is a legacy artifact from the previous SDL2 build system and is not used by the current build.
+SDL3 and SDL3_mixer are automatically downloaded and built via CPM (C++ Package Manager) during the CMake configuration step.
 
 To use libraries already installed on your system instead of building them from source, configure CMake with `-DCPM_USE_LOCAL_PACKAGES=ON`. This is useful to speed up the build and avoid needing all the dependencies required to build SDL3 from source.
 

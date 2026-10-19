@@ -77,7 +77,6 @@ without it, the README and this file are the whole contract.
 ├── CMakeLists.txt       # minimum 3.14; dependencies through CPM
 ├── CMakePresets.json    # upstream's Windows/macOS presets + dev/release/asan/headless
 ├── cmake/CPM.cmake      # upstream's dependency manager
-├── vcpkg.json           # leftover from the SDL2 path; not used by the current build
 ├── src/                 # C++ engine
 │   ├── (root)           # loop, level, objects, AI, HUD, menu, editor
 │   ├── data/            # per-mode paths, classic data, writing back to abuserc
@@ -135,8 +134,7 @@ builds the whole of SDL3 from source** and needs every X11 build dependency.
 `SDL3_mixer` and `SDL3_native_midi` come from CPM either way: no distribution packages
 them yet.
 
-Do not use `vcpkg`: `vcpkg.json` is a leftover of the SDL2 path and takes no part in the
-build.
+There is no `vcpkg` here: the SDL2 path used it, and every dependency now comes through CPM.
 
 Running:
 
