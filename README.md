@@ -213,7 +213,11 @@ stands in for was MIDI and had no grit to match.
 
 There are packages: an AppImage, a Flatpak, a .deb, an .rpm, a portable
 tarball and a PKGBUILD, each built and started on the distribution it is
-for. The first pre-release, `v0.9.0-alpha.0`, carries them.
+for, and a Windows zip that CI builds on every tag. The latest pre-release is
+`v0.9.0-alpha.3` (2026-10-10). It fixed the silent AppImage, made the title
+and menu follow the brightness calibration, added a start menu row that
+downloads the original sound from any mode, and shrank the sound buffer to
+cut the delay after what happens on screen.
 
 Open:
 
