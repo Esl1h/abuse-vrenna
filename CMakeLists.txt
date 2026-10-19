@@ -197,6 +197,16 @@ else()
     # this asks a distribution for: SDL3_mixer is built here and installed
     # beside the game, because no distribution packages it yet, and the
     # binary finds it through a RUNPATH of $ORIGIN/../${CMAKE_INSTALL_LIBDIR}.
+    # A release candidate has to sort before the release it leads to, and
+    # dpkg and rpm both write that with a tilde: with the hyphen, 1.0.0-rc.1
+    # would sort after 1.0.0 and installing the real release would look like
+    # a downgrade. The 0.9.0 pre-releases keep the hyphen they went out with.
+    if(abuse_VERSION MATCHES "-rc\\.")
+        string(REPLACE "-rc." "~rc." _package_version "${abuse_VERSION}")
+        set(CPACK_DEBIAN_PACKAGE_VERSION "${_package_version}")
+        set(CPACK_RPM_PACKAGE_VERSION "${_package_version}")
+    endif()
+
     set(CPACK_DEBIAN_PACKAGE_SECTION "games")
     # Worked out from what the binary actually links against, which differs
     # by distribution: where SDL3 comes from the system it is a dependency,
