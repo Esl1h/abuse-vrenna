@@ -65,8 +65,10 @@ classic preset is always there.
   text is sharp at 1080p instead of being magnified along with the pixels
 - **A start menu in words**, in your language, navigable with a d-pad; the
   strip of icons is one line of config away
-- **An optional new HUD** (`hud=modern`) drawn at native resolution, with a
-  health bar that shows the hit you just took
+- **A new HUD**, the default in the Remastered mode, drawn at native
+  resolution, with a health bar that shows the hit you just took;
+  `hud=classic` brings back the 1995 strip, which the Original mode always
+  keeps
 - **Widescreen** (`aspect=16:9`, and 16:10 and 21:9): a wider picture shows
   more of the room and changes nothing about the fight, because what wakes
   up in a level is a 4:3 region around the player whatever the window does
@@ -196,7 +198,7 @@ the SDL_GPU presentation path with its filters, scanlines and bloom, RGB
 lighting with light that shots and explosions cast in their own colour, an
 override mechanism for higher resolution art, and the audio mix stage.
 
-Every one of those is optional and off unless asked for. The classic preset
+Every one of those is optional. The classic preset
 and the Original mode are compared against reference frames on every run,
 and the replay hashes have to stay identical whatever is switched on: the
 simulation is not allowed to notice any of it.

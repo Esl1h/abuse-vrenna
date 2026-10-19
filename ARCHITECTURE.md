@@ -309,7 +309,8 @@ the game's business. The mode row is marked: see `data::save_mode`.
 draws anything, in `redraw`, `draw_health`, `draw_ammo` and `draw_update`: the strip
 paints from four places, and gating only the first would leave the numbers behind.
 
-The strip is the default. `hud=modern` switches, and the Original mode overrides both.
+The new HUD is the default in the Remastered mode. `hud=classic` brings back the strip,
+and the Original mode keeps the strip whatever the config says.
 
 ## 10. Audio
 
