@@ -7,6 +7,7 @@ by hand: run the script again.
 
 ### Features
 
+- **ui**: switching mode restarts the game by itself (7a707ee)
 - **data**: two more pictures for the end of a level (bcb0c91)
 - **hd**: another picture each time a screen is shown (677553d)
 - **ui**: the Sound set row opens the download (220dd36)
@@ -19,6 +20,8 @@ by hand: run the script again.
 
 ### Documentation
 
+- describe the restart when the mode is switched (6fd6439)
+- add the changelog (4ed99ac)
 - **packaging**: point at main, not the working branch (6bce04a)
 - **sfx**: the horror pack is CC-BY, not CC0 (6f012fd)
 - **packaging**: say that the recipes have been built (4e9967b)
