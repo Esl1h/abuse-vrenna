@@ -217,10 +217,13 @@ stands in for was MIDI and had no grit to match.
 There are packages: an AppImage, a Flatpak, a .deb, an .rpm, a portable
 tarball and a PKGBUILD, each built and started on the distribution it is
 for, and a Windows zip that CI builds on every tag. The latest pre-release is
-`v0.9.0-alpha.3` (2026-10-10). It fixed the silent AppImage, made the title
-and menu follow the brightness calibration, added a start menu row that
-downloads the original sound from any mode, and shrank the sound buffer to
-cut the delay after what happens on screen.
+`v1.0.0-rc.1` (2026-10-19), the first release candidate. Switching mode from
+the title menu restarts the game in the other mode by itself, the title and
+the end-of-level screen show a different picture each time, the Sound set
+row opens the download while the 1995 sound is missing, and the credits for
+the free sound pack list every source with its real licence. Nothing in the
+game's rules changed since `v0.9.0-alpha.3`; what is left before 1.0 is a
+person playing it.
 
 Open:
 
@@ -229,7 +232,8 @@ Open:
   names, so some repeat
 - **Human validation.** The game has been played on Linux and, once, on
   Windows 11. What nobody has judged yet by playing: widescreen, a physical
-  gamepad, and how the visual additions feel
+  gamepad, and how the visual additions feel. The mode restart was tried on
+  Linux only; on Windows and macOS it has been built and never run
 - **Art.** The higher resolution pack has the mechanism and no art; a second,
   more distant background layer for parallax needs tiles that do not exist
 - **macOS.** It builds there, and there is no package: a usable bundle has
