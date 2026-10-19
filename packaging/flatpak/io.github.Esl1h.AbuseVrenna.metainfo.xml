@@ -88,6 +88,21 @@
   </screenshots>
 
   <releases>
+    <release version="1.0.0-rc.1" date="2026-10-19" type="development">
+      <description>
+        <p>
+          The first release candidate. Nothing in the game's rules changed
+          since the last pre-release; what did is around it.
+        </p>
+        <ul>
+          <li>Switching mode from the title menu restarts the game in the other mode by itself</li>
+          <li>The title screen and the end-of-level screen show a different picture each time</li>
+          <li>The Sound set option opens the download of the original sound when it is missing</li>
+          <li>The credits for the free sound pack list every source with its real licence</li>
+          <li>On Windows the start menu no longer hangs for minutes now and then</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.9.0-alpha.3" date="2026-10-10" type="development">
       <description>
         <p>
