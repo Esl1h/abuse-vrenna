@@ -31,6 +31,7 @@ add_executable(abuse
     compat.cpp compat.h
     data/config_file.cpp data/config_file.h data/paths.cpp data/paths.h
     data/fetch_classic.cpp data/fetch_classic.h
+    data/relaunch.cpp data/relaunch.h
     render/options.cpp render/options.h
     render/lightmap.cpp render/lightmap.h
     render/shake.cpp render/shake.h

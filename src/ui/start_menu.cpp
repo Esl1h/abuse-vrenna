@@ -35,6 +35,7 @@
 #include "menu_list.h"
 #include "options_screen.h"
 #include "overlay.h"
+#include "sdlport/relaunch.h"
 #include "timing.h"
 #include "video.h"
 
@@ -116,13 +117,28 @@ void step_difficulty(int dir)
 
 // The row writes the choice down as it is made: the menu has no OK button,
 // and a mode that only applies next time has to survive being chosen.
-void toggle_mode()
+//
+// From the title menu the game then starts itself again, so the new mode is
+// there at once; see data/relaunch.h for why that is a restart and not a
+// switch. True when it has asked for that and the menu should close. With a
+// level loaded, behind the menu, a restart would throw the level away, so the
+// choice waits for the next launch as it always did.
+bool toggle_mode()
 {
     data::Env env = data::system_env();
     data::set_mode(data::mode() == data::Mode::Original
                        ? data::Mode::Remaster : data::Mode::Original);
     if (!data::save_mode(env, data::mode()))
+    {
         printf("Mode: could not write %s\n", data::mode_file(env).c_str());
+        return false;
+    }
+
+    if (current_level)
+        return false;
+
+    sdlport::request_relaunch();
+    return true;
 }
 
 char const *mode_label()
@@ -379,7 +395,8 @@ StartAction run_start_menu()
                 step_difficulty(dir);
             else if (acts[selected] == ActMode)
             {
-                toggle_mode();
+                if (toggle_mode())
+                    return leave(StartAction::Quit);
             }
             continue;
         }
@@ -412,7 +429,8 @@ StartAction run_start_menu()
             step_difficulty(1);
             break;
         case ActMode:
-            toggle_mode();
+            if (toggle_mode())
+                return leave(StartAction::Quit);
             break;
         case ActBrightness:
             overlay().Clear();

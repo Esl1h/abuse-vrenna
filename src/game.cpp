@@ -32,6 +32,7 @@
 #include "common.h"
 
 #include "sdlport/joy.h"
+#include "sdlport/relaunch.h"
 
 #include "dev.h"
 #include "game.h"
@@ -1798,7 +1799,8 @@ Game::Game(int argc, char **argv)
     // through the whole attract sequence: measured at 52 seconds before
     // the first tick of the replay, against 0.6 headless. That is also
     // what made a windowed capture show the title rather than the level.
-    if(!start_edit && !net_start() && !abuse::harness::scripted_run())
+    if(!start_edit && !net_start() && !abuse::harness::scripted_run()
+       && !abuse::sdlport::was_relaunched())
       do_title();
   } else if(main_net_cfg && main_net_cfg->state == net_configuration::SERVER)
   {
@@ -3153,6 +3155,12 @@ int main(int argc, char *argv[])
     // inside exit(), and the ordinary exit was the one path that never
     // called this.
     close_graphics();
+
+    // The mode was switched from the title menu: start again in it. Last, with
+    // the window closed, the sound stopped and the saves and the config
+    // written, because nothing runs after this succeeds.
+    if (abuse::sdlport::relaunch_requested())
+        abuse::sdlport::relaunch(argc, argv);
 
     return 0;
 }
