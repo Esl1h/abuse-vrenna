@@ -86,6 +86,74 @@ TEST_CASE("a seeded run picks one of the three and keeps it") {
     CHECK(found("art/title.spe", "title_screen") == first);
 }
 
+// Asks for another picture the way the cache does: with the path it holds.
+namespace {
+
+std::string next_of(std::string const &current)
+{
+    char *p = abuse::hd::next_variant(current.c_str());
+    std::string s(p ? p : "");
+    free(p);
+    return s;
+}
+
+}
+
+TEST_CASE("another picture is never the one already showing") {
+    abuse::hd::set_variant_seed(4242);
+
+    std::set<std::string> const allowed = {
+        "hd/title/title_screen.png",
+        "hd/title/title_screen.2.png",
+        "hd/title/title_screen.3.png",
+    };
+
+    std::string shown = found("art/title.spe", "title_screen");
+    std::set<std::string> seen = {shown};
+    for (int i = 0; i < 200; i++)
+    {
+        std::string const next = next_of(shown);
+        REQUIRE(allowed.count(next) == 1);
+        bool const same = next == shown;
+        REQUIRE(!same);
+        shown = next;
+        seen.insert(shown);
+    }
+
+    // Uniform over the others, so all three come up in 200 draws.
+    CHECK(seen.size() == 3);
+}
+
+TEST_CASE("find agrees with the last picture handed out") {
+    abuse::hd::set_variant_seed(4242);
+
+    std::string const first = found("art/title.spe", "title_screen");
+    std::string const next = next_of(first);
+    REQUIRE(!next.empty());
+
+    // The cache asks again when it reloads the object, and that must not
+    // undo the change.
+    CHECK(found("art/title.spe", "title_screen") == next);
+}
+
+TEST_CASE("a scripted run never gets another picture") {
+    abuse::hd::set_variant_seed(0);
+    CHECK(next_of("hd/title/title_screen.png").empty());
+}
+
+TEST_CASE("an entry with one picture has no other") {
+    abuse::hd::set_variant_seed(4242);
+    pack_root();
+    CHECK(next_of("hd/frame/end_level_screen.png").empty());
+}
+
+TEST_CASE("a path find did not give is refused") {
+    abuse::hd::set_variant_seed(4242);
+    pack_root();
+    CHECK(next_of("hd/title/title_screen.txt").empty());
+    CHECK(next_of("").empty());
+}
+
 TEST_CASE("a missing entry is still a miss") {
     abuse::hd::set_variant_seed(98765);
     CHECK(found("art/title.spe", "no_such_entry").empty());

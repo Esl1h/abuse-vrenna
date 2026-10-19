@@ -44,6 +44,13 @@ namespace {
 bool g_enabled = true;
 unsigned long long g_variant_seed = 0;
 
+// Advanced by every re-roll, so each showing of a screen draws anew from the
+// seed instead of repeating what the seed gave the first time.
+unsigned long long g_variant_state = 0;
+
+// Which picture each entry shows right now, by the stem of its path.
+std::map<std::string, int> g_chosen;
+
 // Where the pack lives, worked out once, as a path open_file understands.
 //
 // Two notions of path meet here and the first version got them crossed.
@@ -108,36 +115,45 @@ std::string safe_name(char const *name)
     return s;
 }
 
-// Which of an entry's variants this run uses.
+// splitmix64, the same mixer the dynamic light uses. Not the game's RNG: that
+// one is part of the simulation and drawing must not disturb it.
+unsigned long long mix(unsigned long long x)
+{
+    x += 0x9E3779B97F4A7C15ull;
+    x = (x ^ (x >> 30)) * 0xBF58476D1CE4E5B9ull;
+    x = (x ^ (x >> 27)) * 0x94D049BB133111EBull;
+    return x ^ (x >> 31);
+}
+
+// stem + ".png" for the first picture, stem + ".N.png" for the others.
+std::string variant_path(std::string const &stem, int pick)
+{
+    return pick == 1 ? stem + ".png"
+                     : stem + "." + (char)('0' + pick) + ".png";
+}
+
+// Which of an entry's variants it shows first.
 //
 // The choice is made once per entry and remembered, because find() is asked
 // again every time the cache reloads the object and a title screen that
 // changed while the menu was open would look like a glitch rather than a
-// feature.
-//
-// Not the game's RNG: that one is part of the simulation and drawing must
-// not disturb it. splitmix64, the same mixer the dynamic light uses.
+// feature. A later change is next_variant's, and only at a moment the caller
+// picks.
 int variant_of(std::string const &base, int count)
 {
-    static std::map<std::string, int> chosen;
-
     if (count <= 1 || g_variant_seed == 0)
         return 1;
 
-    auto const it = chosen.find(base);
-    if (it != chosen.end())
+    auto const it = g_chosen.find(base);
+    if (it != g_chosen.end())
         return it->second;
 
     unsigned long long x = g_variant_seed;
     for (char const c : base)
         x += (unsigned long long)(unsigned char)c * 0x9E3779B97F4A7C15ull;
-    x += 0x9E3779B97F4A7C15ull;
-    x = (x ^ (x >> 30)) * 0xBF58476D1CE4E5B9ull;
-    x = (x ^ (x >> 27)) * 0x94D049BB133111EBull;
-    x ^= x >> 31;
 
-    int const pick = (int)(x % (unsigned long long)count) + 1;
-    chosen[base] = pick;
+    int const pick = (int)(mix(x) % (unsigned long long)count) + 1;
+    g_chosen[base] = pick;
     return pick;
 }
 
@@ -173,6 +189,8 @@ void set_enabled(bool on)
 void set_variant_seed(unsigned long long seed)
 {
     g_variant_seed = seed;
+    g_variant_state = seed;
+    g_chosen.clear();
 }
 
 bool available()
@@ -197,11 +215,43 @@ char *find(char const *spe_path, char const *name)
         return NULL;
 
     int const pick = variant_of(stem, variant_count(full_stem));
-    std::string const path =
-        pick == 1 ? stem + ".png"
-                  : stem + "." + (char)('0' + pick) + ".png";
+    return strdup(variant_path(stem, pick).c_str());
+}
 
-    return strdup(path.c_str());
+char *next_variant(char const *current)
+{
+    if (!current || g_variant_seed == 0)
+        return NULL;
+
+    // Back to the stem and the number find() built the path from.
+    std::string stem = current;
+    if (stem.size() < 4 || stem.compare(stem.size() - 4, 4, ".png") != 0)
+        return NULL;
+    stem.resize(stem.size() - 4);
+
+    int now = 1;
+    if (stem.size() >= 2 && stem[stem.size() - 2] == '.'
+        && stem[stem.size() - 1] >= '2' && stem[stem.size() - 1] <= '9')
+    {
+        now = stem[stem.size() - 1] - '0';
+        stem.resize(stem.size() - 2);
+    }
+
+    char const *prefix = get_filename_prefix();
+    int const count = variant_count(std::string(prefix ? prefix : "") + stem);
+    if (count <= 1)
+        return NULL;
+
+    // Uniform over the others. The same picture twice running reads as the
+    // screen not having changed, which is the opposite of what asking for
+    // another one is for.
+    g_variant_state = mix(g_variant_state);
+    int pick = (int)(g_variant_state % (unsigned long long)(count - 1)) + 1;
+    if (pick >= now)
+        pick++;
+
+    g_chosen[stem] = pick;
+    return strdup(variant_path(stem, pick).c_str());
 }
 
 image *swap(char *&path, image *original)

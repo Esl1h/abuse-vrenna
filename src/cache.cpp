@@ -671,6 +671,25 @@ void CacheList::unreg(int id)
         printf("Error : trying to unregister free object\n");
 }
 
+void CacheList::reroll_hd(int id)
+{
+    if (id < 0 || id >= total)
+        return;
+
+    CacheItem *me = list + id;
+    if (me->file_number < 0 || !me->hd_path)
+        return;
+
+    char *next = abuse::hd::next_variant(me->hd_path);
+    if (!next)
+        return;
+
+    free(me->hd_path);
+    me->hd_path = next;
+    if (me->last_access >= 0)   // loaded, as img() tells it
+        unmalloc(me);
+}
+
 CacheList::CacheList()
 {
     // Start out with a decent sized cache buffer because it's going to

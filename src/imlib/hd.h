@@ -74,14 +74,21 @@ void set_enabled(bool on);
 
 // Variants. A pack may offer more than one picture for the same entry, as
 // `name.png`, `name.2.png`, `name.3.png` and so on up to nine; the game
-// picks one per run and keeps it for the rest of that run, so the title
-// screen does not change while it is on screen.
+// picks one when the entry is first asked for and keeps it, so the title
+// screen does not change while it is on screen. next_variant is how a caller
+// asks for another one, at a moment of its own choosing.
 //
 // The pick comes from this seed. **Zero means always the first**, which is
 // what a scripted run sets: a test that picked at random would be a test
 // whose reference frame depends on the day it ran. setup() seeds it from
 // the clock otherwise.
 void set_variant_seed(unsigned long long seed);
+
+// Another picture for the entry whose current path is `current`: an allocated
+// path the caller owns, always a different variant from the one it has. Null
+// when the entry has only one picture, when the seed is zero, or when
+// `current` is not a path find() gave. The caller reloads the entry from it.
+char *next_variant(char const *current);
 
 }
 

@@ -390,6 +390,13 @@ int window_state(int state)
 
 void Game::set_state(int new_state)
 {
+    // The title has been seen, so the next time the menu comes up it shows
+    // another of the pack's pictures. Drawn here and not when the menu opens:
+    // the menu redraws the title every frame, and the intro fades it in before
+    // the menu is entered, so a pick made on entry would change under both.
+    if (state == MENU_STATE && new_state != MENU_STATE && title_screen >= 0)
+        cache.reroll_hd(title_screen);
+
     // If we're no longer in the run state, jump back to virtual mouse state
     if (new_state != RUN_STATE)
         wm->SetRightStickMouse();

@@ -1058,7 +1058,9 @@ void *show_kills()
   fade_out(8);
   wm->SetMousePos(ivec2(0, 0));
   main_screen->clear();
-  image *im=cache.img(cache.reg("art/frame.spe","end_level_screen",SPEC_IMAGE,1));
+  int const end_screen=cache.reg("art/frame.spe","end_level_screen",SPEC_IMAGE,1);
+  cache.reroll_hd(end_screen);   // another picture each time it is shown
+  image *im=cache.img(end_screen);
   main_screen->PutImage(im, ivec2(0, 0));
   int x1=im->Size().x+1,y1=0,y2=main_screen->Size().y;
   JCFont *fnt=wm->font();

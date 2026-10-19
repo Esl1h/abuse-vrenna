@@ -1081,8 +1081,14 @@ void setup( int argc, char **argv )
     // zero for a scripted run, which always takes the first: the same rule
     // as the locale and the gamepad, because a reference frame must not
     // depend on the day it was recorded.
+    //
+    // The clock alone is whole seconds, so two launches inside one would show
+    // the same picture; the counter is what tells them apart. Never zero,
+    // which is how a scripted run asks for the first.
     if( !abuse::harness::scripted_run() )
-        abuse::hd::set_variant_seed( (unsigned long long)time( NULL ) );
+        abuse::hd::set_variant_seed(
+            ( (unsigned long long)time( NULL ) * 1000003ull
+              ^ (unsigned long long)SDL_GetPerformanceCounter() ) | 1ull );
 
     // Neither the config nor the command line named one, so ask the system.
     // Except under the test harness: a snapshot taken on a host set to

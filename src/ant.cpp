@@ -449,7 +449,9 @@ void show_stats()
     fade_out(8);
     wm->SetMousePos(ivec2(0, 0));
     main_screen->clear();
-    image *im=cache.img(cache.reg("art/frame.spe","end_level_screen",SPEC_IMAGE,1));
+    int const end_screen=cache.reg("art/frame.spe","end_level_screen",SPEC_IMAGE,1);
+    cache.reroll_hd(end_screen);   // another picture each time it is shown
+    image *im=cache.img(end_screen);
     main_screen->PutImage(im, ivec2(0, 0));
 
 

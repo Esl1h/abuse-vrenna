@@ -117,6 +117,11 @@ public:
                 int rm_dups = 0); // returns id to item
     int loaded(int id);
     void unreg(int id);
+
+    // Gives an entry that has several pictures in the HD pack another one of
+    // them, and drops the loaded copy so the next img() reads the new file.
+    // Does nothing for any other entry. Nobody may hold the image pointer.
+    void reroll_hd(int id);
     void note_need(int id);
 
     backtile *backt(int id);
