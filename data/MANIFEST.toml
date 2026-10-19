@@ -914,6 +914,29 @@ ai_model = "Nano Banana Pro"
 ai_date = "2026-09-22"
 ai_note = "the picture shown when a level is finished, and the backdrop of the language screen; 160x198 from doc/art/key-art-tall.png, trademark symbol patched out"
 
+# The other two, the same way the title has three. The game shows a different
+# one each time the screen comes up.
+
+[[asset]]
+path = "hd/frame/end_level_screen.2.png"
+origin = "Abuse: Vrenna"
+license = "GPL-2.0-or-later"
+modified = true
+ai_tool = "Nano Banana Pro"
+ai_model = "Nano Banana Pro"
+ai_date = "2026-09-22"
+ai_note = "160x198 portrait crop of doc/art/key-art-wordmark.png, resized, no other change"
+
+[[asset]]
+path = "hd/frame/end_level_screen.3.png"
+origin = "Abuse: Vrenna"
+license = "GPL-2.0-or-later"
+modified = true
+ai_tool = "Nano Banana Pro"
+ai_model = "Nano Banana Pro"
+ai_date = "2026-09-22"
+ai_note = "160x198 portrait crop of doc/art/key-art-foundry.png, resized, no other change"
+
 [[asset]]
 path = "hd/title/title_screen.png"
 origin = "Abuse: Vrenna"
@@ -925,7 +948,8 @@ ai_date = "2026-09-22"
 ai_note = "the title screen of the Remastered mode, cropped to 320x200 from doc/art/key-art-wordmark.png; the engine quantises it to the game palette on load"
 
 # The other two title screens. A pack may offer several pictures for one
-# entry as name.png, name.2.png and so on, and the game picks one per run.
+# entry as name.png, name.2.png and so on, and the game picks another one
+# each time the screen is shown.
 
 [[asset]]
 path = "hd/title/title_screen.2.png"

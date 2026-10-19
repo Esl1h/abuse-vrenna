@@ -48,6 +48,8 @@
 !/data/hd/frame/
 /data/hd/frame/*
 !/data/hd/frame/end_level_screen.png
+!/data/hd/frame/end_level_screen.2.png
+!/data/hd/frame/end_level_screen.3.png
 
 # ---------------------------------------------------------------------------
 # Local game state, in case someone runs from the tree
