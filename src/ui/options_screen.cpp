@@ -23,6 +23,7 @@
 #include "hexfont.h"
 #include "i18n/language.h"
 #include "i18n/uitext.h"
+#include "classic_data_screen.h"
 #include "hud.h"
 #include "language_screen.h"
 #include "menu_list.h"
@@ -531,6 +532,16 @@ void cursor_show(char *buf, size_t n)
 // would keep playing from wherever they came from.
 void sound_set_step(int)
 {
+    // With nothing to choose between, the row goes to where the 1995 set is
+    // fetched, which is what the start menu's own row does. Once it is
+    // installed the row is the toggle it was meant to be.
+    if (!data::classic_data_present())
+    {
+        overlay().Clear();
+        run_classic_data_screen();
+        return;
+    }
+
     flags.classic_sfx = !flags.classic_sfx;
 }
 
