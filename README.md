@@ -162,11 +162,12 @@ opens the options and X the controls.
 
 ### Sound
 
-**The Remastered mode has no sound yet.** The free data carries no effects and
-no music, and assembling a free set is the next piece of work.
+The Remastered mode has sound and music of its own, free to redistribute: 73
+effects and 12 tracks. Where each came from, and what it asks of you in
+return, is in [`data/sfx/CREDITS.md`](data/sfx/CREDITS.md).
 
-The Original mode plays as soon as the original data is installed. Pick it on
-the menu, or from the command line:
+The Original mode plays the 1995 sound and music as soon as the original data
+is installed. Pick it on the menu, or from the command line:
 
 ```sh
 ./scripts/fetch-classic-data.sh
