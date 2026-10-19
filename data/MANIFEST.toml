@@ -16,6 +16,7 @@ ignore = [
 allowed_licenses = [
     "public-domain",
     "CC0",
+    "CC-BY-3.0",
     "CC-BY-4.0",
     "CC-BY-SA-4.0",
     "GPL-2.0",
@@ -160,10 +161,12 @@ ai = { tool = "Claude Code", model = "claude-opus-5", date = "2026-09-18" }
 # Free sound pack (Remastered mode)
 # ============================================================
 #
-# Built by tools/free-sfx/build-pack.py, which holds the mapping and
-# the reason for each choice. Every file is CC0 or public domain, so
-# the pack needs no credit line to be redistributable; the credits
-# are in data/sfx/CREDITS.md anyway.
+# Built by tools/free-sfx/build-pack.py (effects) and build-music.py
+# (tracks), which hold the mapping and the reason for each choice. Most
+# of it is CC0 or public domain. The exceptions: the horror library is
+# CC-BY 3.0 and has to be credited, and one track is taken under GPL-2.0
+# from a work offered under three licences. Every source and what it
+# asks for is in data/sfx/CREDITS.md.
 #
 # The names are Bobby Prince's, because that is what the Lisp asks
 # for; the contents are not his and never were. Nothing under
@@ -183,7 +186,7 @@ modified = false
 path = "sfx/adie02.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "morte de alienígena grande; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -191,7 +194,7 @@ note = "morte de alienígena grande; 11 kHz mono 8 bits, nível normalizado por 
 path = "sfx/adie03.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "morte grande, também ambiente; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -199,7 +202,7 @@ note = "morte grande, também ambiente; 11 kHz mono 8 bits, nível normalizado p
 path = "sfx/adie05.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "morte de alienígena pequeno; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -207,7 +210,7 @@ note = "morte de alienígena pequeno; 11 kHz mono 8 bits, nível normalizado por
 path = "sfx/ahit01.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "dor de alienígena; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -223,7 +226,7 @@ note = "alienígena pousando; 11 kHz mono 8 bits, nível normalizado por famíli
 path = "sfx/alien01.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "alienígena gritando; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -231,7 +234,7 @@ note = "alienígena gritando; 11 kHz mono 8 bits, nível normalizado por famíli
 path = "sfx/amb07.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "provocação; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -247,7 +250,7 @@ note = "alerta, susto; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/amb11.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "aberto, inferno; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -263,7 +266,7 @@ note = "aberto, vento; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/amb16.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "aparição; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -279,7 +282,7 @@ note = "caverna; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/ambcave2.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "caverna, inferno; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -303,7 +306,7 @@ note = "caverna, túnel; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/ambfrst2.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "fora, corvos; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -311,7 +314,7 @@ note = "fora, corvos; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/ambtech1.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "ambiente industrial; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -351,7 +354,7 @@ note = "arma montada inimiga; 11 kHz mono 8 bits, nível normalizado por famíli
 path = "sfx/aslash01.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "corte ou mordida; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -383,7 +386,7 @@ note = "botão do menu; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/cleaner.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "o limpador; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -391,7 +394,7 @@ note = "o limpador; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/crmble01.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "bloco desmoronando; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -407,7 +410,7 @@ note = "editor: apagar objeto; 11 kHz mono 8 bits, nível normalizado por famíl
 path = "sfx/doorup01.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "porta subindo; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -527,7 +530,7 @@ note = "editor: ligar objetos; 11 kHz mono 8 bits, nível normalizado por famíl
 path = "sfx/logo09.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "abertura; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -535,7 +538,7 @@ note = "abertura; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/mghit01.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "metralhadora no chão; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -543,7 +546,7 @@ note = "metralhadora no chão; 11 kHz mono 8 bits, nível normalizado por famíl
 path = "sfx/mghit02.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "metralhadora no chão; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -567,7 +570,7 @@ note = "arma de plasma; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/pldeth02.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -575,7 +578,7 @@ note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/pldeth04.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -583,7 +586,7 @@ note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/pldeth05.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -591,7 +594,7 @@ note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/pldeth07.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -599,7 +602,7 @@ note = "morte do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/plpain01.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -607,7 +610,7 @@ note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/plpain02.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -615,7 +618,7 @@ note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/plpain04.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -623,7 +626,7 @@ note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/plpain10.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -631,7 +634,7 @@ note = "dor do jogador; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/poof05.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "sumiço na morte; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -671,7 +674,7 @@ note = "salvar no console; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/scream02.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "grito ao longe; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -679,7 +682,7 @@ note = "grito ao longe; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/scream03.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "grito ao longe; 11 kHz mono 8 bits, nível normalizado por família"
 
@@ -687,7 +690,7 @@ note = "grito ao longe; 11 kHz mono 8 bits, nível normalizado por família"
 path = "sfx/scream08.ogg"
 origin = "https://opengameart.org/content/horror-sound-effects-library"
 author = "Little Robot Sound Factory"
-license = "CC-BY-4.0"
+license = "CC-BY-3.0"
 modified = true
 note = "grito ao longe; 11 kHz mono 8 bits, nível normalizado por família"
 

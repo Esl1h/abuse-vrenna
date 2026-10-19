@@ -117,8 +117,9 @@ def measure(path: pathlib.Path):
             peak = float(line.split("max_volume:")[1].split("dB")[0])
     return mean, peak
 
-# The packs. Every one of them is CC0 or public domain; the licence was read
-# on the page, not deduced from the site.
+# The packs. All of them are CC0 or public domain except the horror library,
+# which is CC-BY 3.0; the licence was read on the page, not deduced from the
+# site.
 PACKS = {
     "kenney-scifi": dict(
         url="https://kenney.nl/media/pages/assets/sci-fi-sounds/6b296f9ecf-1677589334/kenney_sci-fi-sounds.zip",
@@ -178,7 +179,7 @@ PACKS = {
     "horror": dict(
         url="https://opengameart.org/sites/default/files/Horror%20Sound%20Library.zip",
         author="Little Robot Sound Factory",
-        licence="CC-BY-4.0",
+        licence="CC-BY-3.0",
         page="https://opengameart.org/content/horror-sound-effects-library",
     ),
     "joth": dict(
