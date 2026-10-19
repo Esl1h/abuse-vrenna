@@ -73,17 +73,16 @@
     <display_length compare="ge">640</display_length>
   </requires>
 
-  <!-- Screenshots must be reachable over HTTP before submission. These
-       point at the working branch, which is not where a published release
-       will live: at the first tag, main is fast-forwarded from
-       modernisation and these URLs move to main. -->
+  <!-- Screenshots must be reachable over HTTP before submission. main is
+       the release branch, so these do not move when the working branch
+       changes. -->
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/Esl1h/abuse-vrenna/modernisation/doc/screenshots/gameplay.png</image>
+      <image>https://raw.githubusercontent.com/Esl1h/abuse-vrenna/main/doc/screenshots/gameplay.png</image>
       <caption>Fighting a mutant in the prison corridors</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/Esl1h/abuse-vrenna/modernisation/doc/screenshots/startmenu.png</image>
+      <image>https://raw.githubusercontent.com/Esl1h/abuse-vrenna/main/doc/screenshots/startmenu.png</image>
       <caption>The start menu, in the player's language</caption>
     </screenshot>
   </screenshots>
