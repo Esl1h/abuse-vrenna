@@ -34,6 +34,7 @@
 #endif
 
 #include "timing.h"
+#include "timing/filetime.h"
 
 #ifdef __APPLE__
 // OSX 10.1 has nanosleep but no header for it!
@@ -73,11 +74,12 @@ void time_marker::get_time()
 double time_marker::diff_time( time_marker *other )
 {
 #if defined WIN32
-	// Convert both sides to __int64
-	__int64 our_ticks = (ticks.dwHighDateTime << 32L) | ticks.dwLowDateTime;
-	__int64 other_ticks = (other->ticks.dwHighDateTime << 32L) | (other->ticks.dwLowDateTime);
-	// Note we're dividing by 10,000,000 here - ticks are in 100ns increments, not microseconds.
-	return (double)(our_ticks - other_ticks) / 10000000.0;
+	// Both sides as 64-bit counts of 100 ns ticks; see timing/filetime.h for
+	// what the shift used to get wrong.
+	return abuse::timing::filetime_diff_seconds(
+	    abuse::timing::filetime_ticks(ticks.dwHighDateTime, ticks.dwLowDateTime),
+	    abuse::timing::filetime_ticks(other->ticks.dwHighDateTime,
+	                                  other->ticks.dwLowDateTime));
 #else
     return (double)(seconds - other->seconds) + (double)(micro_seconds - other->micro_seconds) / 1000000;
 #endif
