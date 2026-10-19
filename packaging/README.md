@@ -68,6 +68,23 @@ On Fedora and Arch the system SDL3 is used and only the mixer travels.
   and SDL3_mixer from nixpkgs, SDL_native_midi as a fixed-output fetch with
   our patch in `patches`, and the tests off so doctest is not fetched.
 
+## Checksums and the changelog
+
+Two scripts close a release, after the Linux packages are uploaded and CI has
+attached the Windows zip:
+
+```sh
+scripts/changelog.sh v0.9.0-alpha.3 > notes.md   # what that tag brought in
+scripts/release-sums.sh v0.9.0-alpha.3 --upload  # SHA256SUMS over what is attached
+```
+
+`changelog.sh` reads Conventional Commit subjects and groups them by type;
+with no argument it prints the whole history since the fork, which is what
+`CHANGELOG.md` holds. `release-sums.sh` sums whatever is attached when it
+runs, so run it last, and again after adding any asset. Without `--upload` it
+only prints. A download is checked with
+`sha256sum -c SHA256SUMS --ignore-missing`.
+
 ## Identity
 
 - **Title**: Abuse: Vrenna
