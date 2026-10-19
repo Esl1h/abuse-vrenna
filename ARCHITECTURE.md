@@ -302,6 +302,16 @@ inside a level. It replaces the strip of icons that `make_default_buttons` build
 plus `Idle` for the attract loop. `main_menu` acts on it, because starting a level is
 the game's business. The mode row is marked: see `data::save_mode`.
 
+Picking the other mode from the title menu does not switch it in place. The mode fixes
+the picture width, the folder `abuserc` is read from, the folder saves go to, and which
+art and sound each cache entry points at, all during startup, and the Lisp load cannot
+run twice in one process. So the row writes the mode down, `request_relaunch` flags it,
+the menu returns `StartAction::Quit`, and `main` shuts down the usual way and then calls
+`abuse::sdlport::relaunch`, which `exec`s the same binary with the arguments it had, minus
+`--mode` (which would beat the file just written; `data::relaunch_args`). The new process
+sees `ABUSE_RELAUNCHED` and skips the intro. With a level loaded behind the menu nothing
+restarts, because that would throw the level away: the choice waits for the next launch.
+
 ### The HUD
 
 `src/ui/hud.cpp` draws the Remastered HUD into the same overlay. The classic strip is
