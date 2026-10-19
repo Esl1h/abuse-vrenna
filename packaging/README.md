@@ -1,11 +1,12 @@
 # Packaging
 
-Skeletons for the four channels of phase 8. **None of these has been built
-yet**: they carry the identity (name, App ID, licence, description) so that
-everything downstream agrees on it, and the build recipes still need to be
-run.
+The recipes for the channels of phase 8. Every Linux one has been built and
+started, and the Windows zip is built by CI on a tag. Nothing is published to
+Flathub or the AUR yet: that is a submission, and the AUR one needs an
+account. The identity (name, App ID, licence, description) lives here so that
+everything downstream agrees on it.
 
-The Flatpak manifest is now pinned to what `CMakeLists.txt` actually
+The Flatpak manifest is pinned to what `CMakeLists.txt` actually
 fetches, with a commit for every dependency, and `SDL3_native_midi` and
 doctest dealt with: a Flathub build has no network, so anything CPM would
 fetch at configure time has to be supplied as a source or switched off.

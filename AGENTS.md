@@ -98,7 +98,7 @@ without it, the README and this file are the whole contract.
 │   └── MANIFEST.toml    # licence per file; checked by scripts/check-licenses.sh
 ├── doc/                 # upstream documentation and icons
 ├── docs/                # planning (local, not in the repository)
-├── packaging/           # Flatpak, AUR and AppImage skeletons; none built yet
+├── packaging/           # Flatpak, AUR and AppImage recipes; built, none published yet
 └── tests/
     ├── unit/
     ├── replays/         # *.rec

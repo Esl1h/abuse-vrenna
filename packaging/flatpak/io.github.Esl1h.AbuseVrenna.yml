@@ -1,9 +1,10 @@
 # Flatpak manifest for Abuse: Vrenna.
 #
-# NOT YET BUILT. Every version below is pinned to what CMakeLists.txt
-# actually fetches, and every commit is pinned because Flathub does not
-# accept a branch, but nothing here has been through flatpak-builder.
-# scripts/check-flatpak-pins.sh is what keeps it honest until then.
+# Built with flatpak-builder and started, since 2026-09-25, and again for
+# every pre-release; not yet submitted to Flathub. Every version below is
+# pinned to what CMakeLists.txt actually fetches, and every commit is pinned
+# because Flathub does not accept a branch.
+# scripts/check-flatpak-pins.sh fails when the two drift apart.
 #
 #   flatpak install --user flathub org.flatpak.Builder
 #   flatpak run org.flatpak.Builder --user --install --force-clean \
