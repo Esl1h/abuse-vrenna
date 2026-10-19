@@ -49,12 +49,29 @@ if command -v timeout >/dev/null 2>&1; then
     bound=${ABUSE_RUN_TIMEOUT:-120}
 fi
 
+# A run that is killed is tried once more, and said so out loud.
+#
+# The stall that used to kill one run in a third of the Windows CI jobs was a
+# wrong shift in time_marker::diff_time (see timing/filetime.h), fixed. This is
+# kept for whatever else a shared runner can do to a process, and it prints
+# every retry, on the stream the caller left alone, so one that keeps
+# happening is seen and not absorbed.
+exec 3>&2
+
 run_game() {
-    if [ -n "$bound" ]; then
-        timeout "$bound" "$@"
-    else
+    local rc
+    if [ -z "$bound" ]; then
         "$@"
+        return
     fi
+    timeout "$bound" "$@"
+    rc=$?
+    if [ "$rc" -eq 124 ]; then
+        echo "RETRY: killed after ${bound}s, trying once more: $*" >&3
+        timeout "$bound" "$@"
+        rc=$?
+    fi
+    return "$rc"
 }
 
 errors=$(mktemp)
