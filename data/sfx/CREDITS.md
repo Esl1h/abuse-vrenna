@@ -1,8 +1,9 @@
 # Free sound pack
 
-Every file here is CC0 or public domain. Nothing in it requires a
-credit; this file exists because saying where a thing came from is
-worth more than the obligation to say it.
+Most of the files here are CC0 or public domain and ask for nothing. The
+exception is the horror pack below, which is CC-BY: it requires the author to
+be credited wherever the sounds are redistributed. Saying where a thing came
+from is worth more than the obligation to say it, so every pack is listed.
 
 | Pack | Author | Licence |
 | --- | --- | --- |
