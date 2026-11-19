@@ -168,6 +168,11 @@ bool particle_demo();
 // the corner. Same reason --particle-demo exists.
 bool dynlight_demo();
 
+// True once a --playback has run out of packets. The state change that ends
+// it happens inside Game::step, which would go on to the main menu and wait
+// there for its attract timeout; a scripted run has nothing to do in it.
+bool playback_ended();
+
 // Called once per iteration of the main loop, after the world has stepped.
 // Returns false when the run should end.
 bool tick();

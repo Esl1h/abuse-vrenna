@@ -854,6 +854,12 @@ void report(char const *why, uint64_t loop, uint32_t level_tick, uint64_t hash)
 
 }
 
+bool playback_ended()
+{
+    return demo_running && opt.playback
+        && demo_man.current_state() == demo_manager::NORMAL;
+}
+
 bool tick()
 {
     if (opt.want_hash && current_level)
@@ -868,7 +874,7 @@ bool tick()
     }
 
     // A playback that runs out of packets drops back to NORMAL on its own.
-    if (demo_running && opt.playback && demo_man.current_state() == demo_manager::NORMAL)
+    if (playback_ended())
         return false;
 
     // Asked for frames at given level ticks and got them all: there is

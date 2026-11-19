@@ -2479,7 +2479,7 @@ void Game::step()
   {
     Event ev;
     joy_calb(ev);
-  } else if(state == MENU_STATE)
+  } else if(state == MENU_STATE && !abuse::harness::playback_ended())
     main_menu();
 
   if((key_down('x') || key_down(JK_F4))
