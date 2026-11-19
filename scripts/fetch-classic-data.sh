@@ -72,7 +72,10 @@ echo "destination: $dest"
 while read -r hash file; do
     [ -n "$file" ] || continue
     echo "downloading $file"
-    if ! curl -fsSL -o "$tmp/$file" "$base/$file"; then
+    # A server that accepts the connection and then says nothing would
+    # otherwise leave the download screen waiting for good.
+    if ! curl -fsSL --connect-timeout 15 --max-time 300 \
+              -o "$tmp/$file" "$base/$file"; then
         echo "FAIL: could not download $file from $base" >&2
         exit 1
     fi
