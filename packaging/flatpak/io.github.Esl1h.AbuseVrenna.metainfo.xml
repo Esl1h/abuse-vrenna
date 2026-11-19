@@ -88,6 +88,23 @@
   </screenshots>
 
   <releases>
+    <release version="1.0.0-rc.2" date="2026-11-19" type="development">
+      <description>
+        <p>
+          The second release candidate. The game's rules did not change; this
+          one fixes how the game writes its settings and fetches the original
+          sound, and finishes the credits.
+        </p>
+        <ul>
+          <li>The credits screen names the authors of the free sound effects and music</li>
+          <li>The Sound set row says how to get the 1995 sound, and the start menu says that changing the mode restarts the game</li>
+          <li>The settings file is written through a temporary file, so a full disk or a crash cannot empty it</li>
+          <li>Changing a setting no longer corrupts the line beside a commented example of it</li>
+          <li>The original sound download cannot leave a half written folder behind, and gives up on a server that stops answering</li>
+          <li>The download script is found from the game's own folder, not from wherever the game was started</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.0-rc.1" date="2026-10-19" type="development">
       <description>
         <p>
