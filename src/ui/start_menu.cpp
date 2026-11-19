@@ -252,7 +252,9 @@ void run_credits_screen()
     while (!quit)
     {
         draw_backdrop();
-        draw_list(say(i18n::kStartCredits), rows, 6, -1, footers, 3);
+        draw_list(say(i18n::kStartCredits), rows,
+                  (int)(sizeof(rows) / sizeof(rows[0])), -1, footers,
+                  (int)(sizeof(footers) / sizeof(footers[0])));
         wm->flush_screen();
 
         Event ev;
