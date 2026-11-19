@@ -68,11 +68,11 @@ std::string fetch_script()
             return env;
     }
 
-    // Beside the binary, which covers every package: the tarball and the
-    // AppImage install it as abuse-vrenna-fetch-classic-data, the Flatpak
-    // as fetch-classic-data.
     if (char const *base = SDL_GetBasePath())
     {
+        // Beside the binary, which covers every package: the tarball and the
+        // AppImage install it as abuse-vrenna-fetch-classic-data, the Flatpak
+        // as fetch-classic-data.
         for (char const *name : { "abuse-vrenna-fetch-classic-data",
                                   "fetch-classic-data" })
         {
@@ -80,11 +80,14 @@ std::string fetch_script()
             if (is_file(path))
                 return path;
         }
-    }
 
-    // And a checkout, where the game is run from the top of the tree.
-    if (is_file("scripts/fetch-classic-data.sh"))
-        return "scripts/fetch-classic-data.sh";
+        // And a checkout, found from the binary (build/<preset>/src/) and not
+        // from the working directory: whatever directory the game is started
+        // in must not be able to supply the script it runs.
+        std::string const tree = std::string(base) + "../../../scripts/fetch-classic-data.sh";
+        if (is_file(tree))
+            return tree;
+    }
 
     return std::string();
 }

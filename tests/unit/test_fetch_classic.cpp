@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
 #include <chrono>
+#include <filesystem>
 #include <fstream>
 #include <string>
 #include <thread>
@@ -72,6 +73,25 @@ TEST_CASE("the script is found through the override") {
     std::string const path = write_script("fake-fetch.sh", "exit 0\n");
     CHECK(abuse::data::fetch_script() == path);
     abuse::data::fetch_reset();
+}
+
+// A script in the directory the game happens to be started from must not be
+// the one it runs. The checkout is found from the binary instead.
+TEST_CASE("a script in the working directory is not picked up") {
+    namespace fs = std::filesystem;
+    SDL_UnsetEnvironmentVariable(SDL_GetEnvironment(), "ABUSE_FETCH_SCRIPT");
+
+    fs::path const here = fs::current_path();
+    fs::path const dir = fs::path(ABUSE_TEST_BUILD_DIR) / "decoy";
+    fs::create_directories(dir / "scripts");
+    std::ofstream(dir / "scripts" / "fetch-classic-data.sh") << "#!/bin/sh\n";
+    fs::current_path(dir);
+
+    std::string const found = abuse::data::fetch_script();
+    fs::current_path(here);
+    fs::remove_all(dir);
+
+    CHECK(found != "scripts/fetch-classic-data.sh");
 }
 
 TEST_CASE("what the script prints comes back, and it ends" * doctest::skip(kNoShell)) {
