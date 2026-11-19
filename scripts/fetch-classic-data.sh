@@ -59,7 +59,12 @@ fi
 command -v curl > /dev/null || { echo "curl not found" >&2; exit 1; }
 command -v sha256sum > /dev/null || { echo "sha256sum not found" >&2; exit 1; }
 
-tmp=$(mktemp -d)
+# Beside the destination, not in /tmp: the final mv has to be a rename, and
+# /tmp is often another filesystem (tmpfs), where mv copies and a kill halfway
+# leaves the destination half written.
+parent=$(dirname "$dest")
+mkdir -p "$parent"
+tmp=$(mktemp -d "$parent/.abuse-fetch.XXXXXX")
 trap 'rm -rf "$tmp"' EXIT
 
 echo "destination: $dest"
@@ -99,7 +104,6 @@ echo "extracted: $wavs effects, $hmis music tracks"
 [ "$wavs" -gt 0 ] || { echo "FAIL: no sound effect extracted" >&2; exit 1; }
 
 # Atomic write: the destination only ever exists complete.
-mkdir -p "$(dirname "$dest")"
 if [ -e "$dest" ]; then
     previous="$dest.previous.$$"
     mv "$dest" "$previous"
