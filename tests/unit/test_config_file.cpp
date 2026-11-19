@@ -66,6 +66,23 @@ TEST_CASE("a real assignment wins over a commented example") {
     CHECK(out == "language=de\n");
 }
 
+// The claimed comment is dropped by where it was written. Looking for its text
+// instead found the last line that merely contained it, which here is
+// foo_mode=remaster, and glued "foo_" onto the next line.
+TEST_CASE("taking over a comment leaves the lines around it alone") {
+    std::string in =
+        "; mode=remaster\n"
+        "foo_mode=remaster\n"
+        "bar=1\n"
+        "mode=original\n";
+
+    std::string out = set_config_key(in, "mode", "remaster");
+    CHECK(out ==
+        "foo_mode=remaster\n"
+        "bar=1\n"
+        "mode=remaster\n");
+}
+
 TEST_CASE("only the first of several assignments is rewritten") {
     std::string in = "rumble=100\nrumble=50\n";
     CHECK(set_config_key(in, "rumble", "0") == "rumble=0\nrumble=50\n");

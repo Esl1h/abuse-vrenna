@@ -57,6 +57,7 @@ std::string set_config_key(std::string const &text, std::string const &key,
 
     bool written = false;
     bool used_comment = false;
+    size_t claimed_at = 0;      // where the line taken from a comment starts
     size_t pos = 0;
 
     while (pos <= text.size())
@@ -75,13 +76,12 @@ std::string set_config_key(std::string const &text, std::string const &key,
             // both ends up with the real one rewritten.
             if (!written || (used_comment && !commented))
             {
+                // Drop the earlier line we had claimed from a comment, by
+                // where it was written: searching for its text would find
+                // the last line that merely contains it.
                 if (written)
-                {
-                    // Drop the earlier line we had claimed from a comment.
-                    size_t drop = out.rfind(assignment);
-                    if (drop != std::string::npos)
-                        out.erase(drop, assignment.size() + 1);
-                }
+                    out.erase(claimed_at, assignment.size() + 1);
+                claimed_at = out.size();
                 out += assignment;
                 written = true;
                 used_comment = commented;
