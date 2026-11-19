@@ -1,9 +1,15 @@
 #include <doctest/doctest.h>
 
+#include <stdio.h>
+
+#include <filesystem>
+#include <fstream>
+#include <sstream>
 #include <string>
 
 #include "data/config_file.h"
 
+using abuse::data::save_config_key;
 using abuse::data::set_config_key;
 
 TEST_CASE("an existing assignment is replaced where it stands") {
@@ -206,4 +212,59 @@ TEST_CASE("the rest of the file is preserved") {
         "bind=left,key,B\n"
         "\n"
         "; fim\n");
+}
+
+namespace {
+
+std::filesystem::path scratch(char const *name)
+{
+    std::filesystem::path dir = std::filesystem::temp_directory_path() / "abuse-config-test";
+    std::filesystem::create_directories(dir);
+    return dir / name;
+}
+
+std::string slurp(std::filesystem::path const &p)
+{
+    std::ifstream in(p, std::ios::binary);
+    std::stringstream ss;
+    ss << in.rdbuf();
+    return ss.str();
+}
+
+}
+
+TEST_CASE("saving writes the file and leaves no temporary behind") {
+    auto path = scratch("abuserc");
+    std::filesystem::remove(path);
+
+    CHECK(save_config_key(path.string().c_str(), "mode", "original"));
+    CHECK(slurp(path) == "mode=original\n");
+    CHECK(!std::filesystem::exists(path.string() + ".tmp"));
+}
+
+TEST_CASE("a failed save keeps the old file whole") {
+    auto path = scratch("kept");
+    {
+        std::ofstream out(path, std::ios::binary);
+        out << "left=a\nright=d\n";
+    }
+    // The temporary's name is taken by a directory, so the write cannot start.
+    std::filesystem::create_directories(path.string() + ".tmp");
+
+    CHECK(!save_config_key(path.string().c_str(), "left", "b"));
+    CHECK(slurp(path) == "left=a\nright=d\n");
+
+    std::filesystem::remove_all(path.string() + ".tmp");
+}
+
+TEST_CASE("a file that is there and cannot be read is not overwritten") {
+    // A directory in the file's place: it exists, and reading it fails.
+    auto path = scratch("unreadable");
+    std::filesystem::remove_all(path);
+    std::filesystem::create_directories(path);
+
+    CHECK(!save_config_key(path.string().c_str(), "mode", "original"));
+    CHECK(std::filesystem::is_directory(path));
+
+    std::filesystem::remove_all(path);
 }

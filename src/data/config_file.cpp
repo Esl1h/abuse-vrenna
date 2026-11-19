@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include <string.h>
+
+#include <filesystem>
 #include "compat.h"
 
 namespace abuse::data {
@@ -174,8 +176,15 @@ std::string set_config_lines(std::string const &text, std::string const &key,
 
 namespace {
 
+// A file that is not there reads as empty, which is how a first run gets its
+// file. One that is there and cannot be read is a failure: carrying on would
+// write the new setting over everything the player had.
 bool read_file(char const *path, std::string &text)
 {
+    std::error_code ec;
+    if (!std::filesystem::exists(path, ec))
+        return true;
+
     FILE *in = fopen(path, "rb");
     if (!in)
         return false;
@@ -183,18 +192,32 @@ bool read_file(char const *path, std::string &text)
     size_t n;
     while ((n = fread(buf, 1, sizeof(buf), in)) > 0)
         text.append(buf, n);
+    bool ok = !ferror(in);
     fclose(in);
-    return true;
+    return ok;
 }
 
+// Written beside the file and renamed over it, so a full disk or a crash
+// halfway leaves the old file whole instead of an empty one.
 bool write_file(char const *path, std::string const &text)
 {
-    FILE *f = fopen(path, "wb");
+    std::string const tmp = std::string(path) + ".tmp";
+
+    FILE *f = fopen(tmp.c_str(), "wb");
     if (!f)
         return false;
     bool ok = fwrite(text.data(), 1, text.size(), f) == text.size();
-    fclose(f);
-    return ok;
+    ok = fclose(f) == 0 && ok;
+
+    std::error_code ec;
+    if (ok)
+        std::filesystem::rename(tmp, path, ec);
+    if (!ok || ec)
+    {
+        std::filesystem::remove(tmp, ec);
+        return false;
+    }
+    return true;
 }
 
 }
@@ -206,8 +229,8 @@ bool save_config_lines(char const *path, char const *key,
         return false;
 
     std::string text;
-    read_file(path, text);
-    return write_file(path, set_config_lines(text, key, values));
+    return read_file(path, text)
+        && write_file(path, set_config_lines(text, key, values));
 }
 
 bool save_config_key(char const *path, char const *key, char const *value)
@@ -216,24 +239,8 @@ bool save_config_key(char const *path, char const *key, char const *value)
         return false;
 
     std::string text;
-    FILE *in = fopen(path, "rb");
-    if (in)
-    {
-        char buf[4096];
-        size_t n;
-        while ((n = fread(buf, 1, sizeof(buf), in)) > 0)
-            text.append(buf, n);
-        fclose(in);
-    }
-
-    std::string out = set_config_key(text, key, value);
-
-    FILE *f = fopen(path, "wb");
-    if (!f)
-        return false;
-    bool ok = fwrite(out.data(), 1, out.size(), f) == out.size();
-    fclose(f);
-    return ok;
+    return read_file(path, text)
+        && write_file(path, set_config_key(text, key, value));
 }
 
 }
