@@ -40,6 +40,10 @@ inline constexpr Phrase kOptionsHelp    = { "arrows change, Esc leaves",
                                             "setas mudam, Esc sai" };
 inline constexpr Phrase kRestartNote    = { "* takes effect next time the game starts",
                                             "* vale na pr\xf3xima vez que o jogo abrir" };
+// Start menu footer from the title, where a new mode restarts the game by
+// itself. Inside a level the choice still waits, and kRestartNote says so.
+inline constexpr Phrase kRestartNowNote = { "* changing it restarts the game",
+                                            "* mudar reinicia o jogo" };
 inline constexpr Phrase kSaved          = { "saved to abuserc",
                                             "salvo no abuserc" };
 inline constexpr Phrase kNotSaved       = { "could not write abuserc",
@@ -54,8 +58,8 @@ inline constexpr Phrase kOptAspect      = { "Picture shape", "Formato da imagem"
 inline constexpr Phrase kOptSound       = { "Sound set", "Conjunto de som" };
 inline constexpr Phrase kSoundFree      = { "free", "livre" };
 inline constexpr Phrase kSoundClassic   = { "original 1995", "original de 1995" };
-inline constexpr Phrase kSoundNotHere   = { "free (the 1995 one is not installed)",
-                                            "livre (o de 1995 n\xe3o est\xe1 instalado)" };
+inline constexpr Phrase kSoundNotHere   = { "free (change to get the 1995 one)",
+                                            "livre (mude para baixar o de 1995)" };
 
 inline constexpr Phrase kOptHud         = { "HUD", "HUD" };
 inline constexpr Phrase kHudClassic     = { "classic", "cl\xe1" "ssico" };
@@ -168,6 +172,13 @@ inline constexpr Phrase kCreditThis     = { "Data, licences and history",
                                             "Dados, licen\xe7" "as e hist\xf3" "ria" };
 inline constexpr Phrase kCreditLicence  = { "Code GPL-2.0, game data public domain",
                                             "C\xf3" "digo GPL-2.0, dados em dom\xed" "nio p\xfa" "blico" };
+// CC-BY 3.0 asks for the author to be named wherever the sounds are
+// redistributed, and the pack ships inside the game. The names are proper
+// nouns, so only the labels are translated.
+inline constexpr Phrase kCreditSfx      = { "Free effects", "Efeitos livres" };
+inline constexpr Phrase kCreditMusic    = { "Free music", "M\xfa" "sica livre" };
+inline constexpr Phrase kCreditSoundFile = { "Full sound credits: data/sfx/CREDITS.md",
+                                             "Cr\xe9" "ditos do som: data/sfx/CREDITS.md" };
 inline constexpr Phrase kCreditBack     = { "Esc goes back", "Esc volta" };
 
 // ---- notices --------------------------------------------------------------

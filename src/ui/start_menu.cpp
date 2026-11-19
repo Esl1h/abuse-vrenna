@@ -230,7 +230,7 @@ void draw_backdrop()
 
 void run_credits_screen()
 {
-    Row rows[4];
+    Row rows[6];
     rows[0].label = say(i18n::kCreditGame);
     rows[0].value = "Crack dot Com";
     rows[1].label = say(i18n::kCreditPort);
@@ -239,14 +239,20 @@ void run_credits_screen()
     rows[2].value = "Xenoveritas";
     rows[3].label = say(i18n::kCreditThis);
     rows[3].value = "abuse.zoy.org";
+    rows[4].label = say(i18n::kCreditSfx);
+    rows[4].value = "Little Robot Sound Factory, CC-BY 3.0";
+    rows[5].label = say(i18n::kCreditMusic);
+    rows[5].value = "Joth, Juhani Junkala, qubodup";
 
-    char const *footers[2] = { say(i18n::kCreditLicence), say(i18n::kCreditBack) };
+    char const *footers[3] = { say(i18n::kCreditLicence),
+                               say(i18n::kCreditSoundFile),
+                               say(i18n::kCreditBack) };
 
     bool quit = false;
     while (!quit)
     {
         draw_backdrop();
-        draw_list(say(i18n::kStartCredits), rows, 4, -1, footers, 2);
+        draw_list(say(i18n::kStartCredits), rows, 6, -1, footers, 3);
         wm->flush_screen();
 
         Event ev;
@@ -311,7 +317,11 @@ void draw_start_menu(int selected)
     Action acts[ActCount];
     int count = build_rows(rows, acts);
 
-    char const *footers[2] = { say(i18n::kStartHelp), say(i18n::kRestartNote) };
+    // From the title the mode row restarts the game; inside a level it waits
+    // for the next launch (see toggle_mode).
+    char const *footers[2] = { say(i18n::kStartHelp),
+                               say(current_level ? i18n::kRestartNote
+                                                 : i18n::kRestartNowNote) };
 
     // "Abuse" is the name of the game in every language, so the title is the
     // one string on this screen that is not translated.
