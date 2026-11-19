@@ -177,7 +177,7 @@ set_tests_properties(window PROPERTIES SKIP_RETURN_CODE 77)
 # The suppression file goes to LSAN_OPTIONS and not to ASAN_OPTIONS: they
 # are separate files with separate grammars, and ASan answers a `leak:` line
 # with "failed to parse suppressions" and exits.
-set_tests_properties(replays save aspect snapshots window gpu PROPERTIES
+set_tests_properties(replays save aspect snapshots window gpu install_tree PROPERTIES
     ENVIRONMENT "ASAN_OPTIONS=detect_leaks=1;LSAN_OPTIONS=suppressions=${abuse_SOURCE_DIR}/tests/lsan.supp")
 
 else()
