@@ -177,8 +177,10 @@ inline constexpr Phrase kCreditLicence  = { "Code GPL-2.0, game data public doma
 // nouns, so only the labels are translated.
 inline constexpr Phrase kCreditSfx      = { "Free effects", "Efeitos livres" };
 inline constexpr Phrase kCreditMusic    = { "Free music", "M\xfa" "sica livre" };
-inline constexpr Phrase kCreditSoundFile = { "Full sound credits: data/sfx/CREDITS.md",
-                                             "Cr\xe9" "ditos do som: data/sfx/CREDITS.md" };
+// Where the full list lives, as an address a player can open: the file in the
+// package is out of reach inside a Flatpak or an AppImage.
+inline constexpr Phrase kCreditMore     = { "Every sound credit: github.com/Esl1h/abuse-vrenna",
+                                            "Todos os cr\xe9" "ditos do som: github.com/Esl1h/abuse-vrenna" };
 inline constexpr Phrase kCreditBack     = { "Esc goes back", "Esc volta" };
 
 // ---- notices --------------------------------------------------------------

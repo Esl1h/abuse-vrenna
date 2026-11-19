@@ -79,7 +79,7 @@ TEST_CASE("every phrase has both columns filled") {
         kNoRoomForMore, kActMoveLeft, kActMoveRight, kActUp, kActDown, kActFire,
         kActSpecial, kActWeaponPrev, kActWeaponNext, kPadLost, kPadLostHelp,
         kMenuHint, kStartOriginalSound, kClassicTitleOptional,
-        kRestartNowNote, kSoundNotHere, kCreditSfx, kCreditMusic, kCreditSoundFile,
+        kRestartNowNote, kSoundNotHere, kCreditSfx, kCreditMusic, kCreditMore,
     };
 
     for (Phrase const &p : all)

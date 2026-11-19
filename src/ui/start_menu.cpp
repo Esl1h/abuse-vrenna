@@ -245,7 +245,7 @@ void run_credits_screen()
     rows[5].value = "Joth, Juhani Junkala, qubodup";
 
     char const *footers[3] = { say(i18n::kCreditLicence),
-                               say(i18n::kCreditSoundFile),
+                               say(i18n::kCreditMore),
                                say(i18n::kCreditBack) };
 
     bool quit = false;
