@@ -217,13 +217,11 @@ stands in for was MIDI and had no grit to match.
 There are packages: an AppImage, a Flatpak, a .deb, an .rpm, a portable
 tarball and a PKGBUILD, each built and started on the distribution it is
 for, and a Windows zip that CI builds on every tag. The latest pre-release is
-`v1.0.0-rc.1` (2026-10-19), the first release candidate. Switching mode from
-the title menu restarts the game in the other mode by itself, the title and
-the end-of-level screen show a different picture each time, the Sound set
-row opens the download while the 1995 sound is missing, and the credits for
-the free sound pack list every source with its real licence. Nothing in the
-game's rules changed since `v0.9.0-alpha.3`; what is left before 1.0 is a
-person playing it.
+`v1.0.0-rc.2` (2026-11-19), the second release candidate. The game's rules did
+not change; the credits now name the authors of the free sound pack, the
+settings file is written through a temporary so a full disk or a crash cannot
+empty it, and the original sound download can no longer leave a half written
+folder behind. What is left before 1.0 is a person playing it.
 
 Open:
 
