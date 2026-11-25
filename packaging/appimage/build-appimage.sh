@@ -53,9 +53,6 @@ cmake -S "$root" -B "$build" -G Ninja \
 cmake --build "$build"
 DESTDIR="$appdir" cmake --install "$build"
 
-install -Dm755 "$root/scripts/fetch-classic-data.sh" \
-    "$appdir/usr/bin/abuse-vrenna-fetch-classic-data"
-
 # --icon-filename, because the name of the file on disk has to match the
 # Icon= key of the desktop entry and the source is not called that.
 linuxdeploy-x86_64.AppImage \

@@ -43,12 +43,6 @@ build() {
 package() {
     DESTDIR="$pkgdir" cmake --install build
 
-    install -Dm644 "$_srcdir/packaging/flatpak/io.github.Esl1h.AbuseVrenna.desktop" \
-        "$pkgdir/usr/share/applications/abuse-vrenna.desktop"
-    install -Dm644 "$_srcdir/packaging/flatpak/io.github.Esl1h.AbuseVrenna.metainfo.xml" \
-        "$pkgdir/usr/share/metainfo/io.github.Esl1h.AbuseVrenna.metainfo.xml"
-    install -Dm755 "$_srcdir/scripts/fetch-classic-data.sh" \
-        "$pkgdir/usr/bin/abuse-vrenna-fetch-classic-data"
     install -Dm644 "$_srcdir/COPYING" \
         "$pkgdir/usr/share/licenses/$pkgname/COPYING"
 }

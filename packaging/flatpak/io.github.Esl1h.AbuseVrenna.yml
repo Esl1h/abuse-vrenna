@@ -112,14 +112,7 @@ modules:
     # These run in the build directory, which builddir: true puts one level
     # below the sources, hence the ../ on every path.
     post-install:
-      - install -Dm644 ../packaging/flatpak/io.github.Esl1h.AbuseVrenna.metainfo.xml
-          /app/share/metainfo/io.github.Esl1h.AbuseVrenna.metainfo.xml
-      - install -Dm644 ../packaging/flatpak/io.github.Esl1h.AbuseVrenna.desktop
-          /app/share/applications/io.github.Esl1h.AbuseVrenna.desktop
-      # The icons install themselves, from data/CMakeLists.txt, into
-      # /app/share/icons/hicolor. Nothing to do here.
-      #
-      # The original data fetcher, which the player runs once from inside
-      # the sandbox. It finds its checksum list beside the game data; see
-      # scripts/fetch-classic-data.sh.
-      - install -Dm755 ../scripts/fetch-classic-data.sh /app/bin/fetch-classic-data
+      # The desktop entry, the metainfo, the icons and the original data
+      # fetcher are all installed by CMake. This keeps the shorter name the
+      # fetcher has had inside the sandbox.
+      - ln -s abuse-vrenna-fetch-classic-data /app/bin/fetch-classic-data

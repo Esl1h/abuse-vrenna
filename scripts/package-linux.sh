@@ -67,8 +67,6 @@ build_tarball() {
     cmake --build "$stage/build"
     DESTDIR="$out" cmake --install "$stage/build"
 
-    install -Dm755 "$root/scripts/fetch-classic-data.sh" \
-        "$out/usr/bin/abuse-vrenna-fetch-classic-data"
     install -Dm644 "$root/README.md" "$out/README.md"
     install -Dm644 "$root/COPYING" "$out/COPYING"
 

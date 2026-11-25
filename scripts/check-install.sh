@@ -55,6 +55,20 @@ need "$data/abuse.lsp"
 need "$data/art"
 need "$data/levels"
 
+# What a package needs beyond the game itself, and what the .deb and the .rpm
+# shipped without: they are built from these rules alone, while the other
+# packages added the three files by hand. Without the fetcher the "Get
+# original sound" row can do nothing; without the other two there is no menu
+# entry and no listing in a software centre.
+need "$stage/usr/bin/abuse-vrenna-fetch-classic-data"
+need "$stage/usr/share/applications/io.github.Esl1h.AbuseVrenna.desktop"
+need "$stage/usr/share/metainfo/io.github.Esl1h.AbuseVrenna.metainfo.xml"
+if [ -e "$stage/usr/bin/abuse-vrenna-fetch-classic-data" ] \
+    && [ ! -x "$stage/usr/bin/abuse-vrenna-fetch-classic-data" ]; then
+    echo "the fetcher is installed but not executable" >&2
+    fail=1
+fi
+
 # The free pack. Counted rather than listed: the point is that the install
 # carries it at all, and how many there are is check-audio-pack.sh's job.
 sfx=$(find "$data/sfx" -name '*.ogg' 2>/dev/null | wc -l)

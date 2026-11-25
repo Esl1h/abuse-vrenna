@@ -226,6 +226,24 @@ else()
         endforeach()
     ")
 
+    # What every package needs beside the game. Here, and not in each
+    # packaging recipe: the .deb and the .rpm come from these rules alone,
+    # and went out without any of the three while the other recipes added
+    # them by hand. scripts/check-install.sh requires them.
+    #
+    # The desktop entry keeps the application id as its name, which is what
+    # the metainfo's <launchable> points at.
+    include(GNUInstallDirs)
+    install(PROGRAMS ${abuse_SOURCE_DIR}/scripts/fetch-classic-data.sh
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
+        RENAME abuse-vrenna-fetch-classic-data)
+    install(FILES
+        ${abuse_SOURCE_DIR}/packaging/flatpak/io.github.Esl1h.AbuseVrenna.desktop
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+    install(FILES
+        ${abuse_SOURCE_DIR}/packaging/flatpak/io.github.Esl1h.AbuseVrenna.metainfo.xml
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
+
     # A library CPM built is a library only this build tree has.
     #
     # No distribution packages SDL3_mixer yet, so CPM builds it here, and
