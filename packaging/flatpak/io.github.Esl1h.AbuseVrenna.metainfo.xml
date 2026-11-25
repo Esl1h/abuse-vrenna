@@ -88,6 +88,18 @@
   </screenshots>
 
   <releases>
+    <release version="1.0.0-rc.3" date="2026-11-25" type="development">
+      <description>
+        <p>
+          The third release candidate. The game did not change; the Debian
+          and Fedora packages are fixed.
+        </p>
+        <ul>
+          <li>The .deb and .rpm packages add the game to the application menu</li>
+          <li>They also ship the download script, so the original sound can be fetched from inside the game</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.0-rc.2" date="2026-11-19" type="development">
       <description>
         <p>
