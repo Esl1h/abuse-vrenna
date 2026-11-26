@@ -5,8 +5,28 @@ by hand: run the script again.
 
 ## Unreleased
 
+### Documentation
+
+- **readme**: bring the state of the work to rc.3 (da6a2e2)
+
 ### Build and CI
 
+- **aur**: the checksum of the rc.3 tarball (7441238)
+
+## v1.0.0-rc.3 (2026-11-25)
+
+### Fixes
+
+- **package**: install the fetcher and menu entry (13f1fdb)
+
+### Documentation
+
+- regenerate the changelog for rc.2 (2a6220b)
+- **readme**: bring the state of the work to rc.2 (9778e86)
+
+### Build and CI
+
+- **release**: version 1.0.0-rc.3 (81d39af)
 - **aur**: the checksum of the rc.2 tarball (6630b71)
 
 ## v1.0.0-rc.2 (2026-11-19)
