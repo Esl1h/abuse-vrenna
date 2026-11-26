@@ -25,7 +25,7 @@ optdepends=('curl: downloading the original sound and music')
 # not conflict with `abuse`, the SDL 1.2 port. The two can be installed side
 # by side and share nothing but the user's ~/.abuse from a legacy install.
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/$_tag.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('4ad3fb291d244bc1a941d2640a27e282fe873726a570aef0fd66d14c4d3d5680')
 
 _srcdir="$pkgname-${_tag#v}"
 
