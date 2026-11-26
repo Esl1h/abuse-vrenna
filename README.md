@@ -216,12 +216,10 @@ stands in for was MIDI and had no grit to match.
 
 There are packages: an AppImage, a Flatpak, a .deb, an .rpm, a portable
 tarball and a PKGBUILD, each built and started on the distribution it is
-for, and a Windows zip that CI builds on every tag. The latest pre-release is
-`v1.0.0-rc.2` (2026-11-19), the second release candidate. The game's rules did
-not change; the credits now name the authors of the free sound pack, the
-settings file is written through a temporary so a full disk or a crash cannot
-empty it, and the original sound download can no longer leave a half written
-folder behind. What is left before 1.0 is a person playing it.
+for, and a Windows zip that CI builds on every tag. The latest pre-release is `v1.0.0-rc.3` (2026-11-25), the third release
+candidate. The game's rules did not change: the Debian and Fedora packages
+now come with the menu entry and the original sound download, which they had
+been shipping without. What is left before 1.0 is a person playing it.
 
 Open:
 
